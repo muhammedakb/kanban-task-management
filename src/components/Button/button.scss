@@ -1,0 +1,44 @@
+@import '../../style/utils/variables';
+@import '../../style/utils/typography';
+@import '../../style/utils/mix';
+
+.btn {
+  width: 255px;
+  color: $white;
+  border: none;
+  cursor: pointer;
+  @include center-flex;
+  &.s {
+    height: 40px;
+    border-radius: 20px;
+    @extend .fw-700-sm;
+  }
+  &.l {
+    height: 48px;
+    border-radius: 24px;
+    @extend .fw-700-m;
+  }
+  &.primary {
+    background-color: $main-purple;
+    &:hover {
+      background-color: $main-purple-hover;
+    }
+  }
+  &.secondary {
+    background-color: rgba(99, 95, 199, 0.1);
+    color: $main-purple;
+    &:hover {
+      background: rgba(99, 95, 199, 0.25);
+    }
+  }
+  &.destructive {
+    background-color: $red;
+    &:hover {
+      background-color: $red-hover;
+    }
+  }
+  &:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+}
