@@ -1,0 +1,25 @@
+@import '../../style/utils/variables';
+
+@keyframes animate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  border: 0.2em solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  animation: animate 0.6s linear infinite;
+  &.primary {
+    border-top: 0.2em solid $white;
+  }
+
+  &.secondary {
+    border-top: 0.2em solid $main-purple;
+  }
+}
