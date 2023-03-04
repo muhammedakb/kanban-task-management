@@ -11,49 +11,49 @@ const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
-  size: 's',
+  size: 'small',
   text: 'Primary Button',
   variant: 'primary',
 };
 
 export const Secondary = Template.bind({});
 Secondary.args = {
-  size: 's',
+  size: 'small',
   text: 'Secondary Button',
   variant: 'secondary',
 };
 
 export const Destructive = Template.bind({});
 Destructive.args = {
-  size: 's',
+  size: 'small',
   text: 'Destructive Button',
   variant: 'destructive',
 };
 
 export const Small = Template.bind({});
 Small.args = {
-  size: 's',
+  size: 'small',
   text: 'Small Button',
   variant: 'primary',
 };
 
 export const Large = Template.bind({});
 Large.args = {
-  size: 'l',
+  size: 'large',
   text: 'Large Button',
   variant: 'primary',
 };
 
 export const Loading = Template.bind({});
 Loading.args = {
-  size: 'l',
+  size: 'large',
   variant: 'primary',
   loading: true,
 };
 
 export const Disabled = Template.bind({});
 Disabled.args = {
-  size: 'l',
+  size: 'large',
   text: 'Disabled Button',
   variant: 'primary',
   disabled: true,
