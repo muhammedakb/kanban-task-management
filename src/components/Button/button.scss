@@ -8,12 +8,12 @@
   border: none;
   cursor: pointer;
   @include center-flex;
-  &.s {
+  &.small {
     height: 40px;
     border-radius: 20px;
     @extend .fw-700-sm;
   }
-  &.l {
+  &.large {
     height: 48px;
     border-radius: 24px;
     @extend .fw-700-m;

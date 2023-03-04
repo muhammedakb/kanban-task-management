@@ -7,7 +7,7 @@ type ButtonProps = {
   disabled?: boolean;
   loading?: boolean;
   onClick?: () => void;
-  size?: 's' | 'l';
+  size?: 'small' | 'large';
   text: string;
   variant?: 'primary' | 'secondary' | 'destructive';
 };
@@ -16,7 +16,7 @@ const Button = ({
   disabled = false,
   loading,
   onClick,
-  size = 's',
+  size = 'small',
   text,
   variant = 'primary',
 }: ButtonProps) => (
