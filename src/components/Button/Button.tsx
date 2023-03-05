@@ -1,4 +1,3 @@
-// height 40-48
 import classNames from 'classnames';
 import Spinner from '../Spinner';
 import './button.scss';
