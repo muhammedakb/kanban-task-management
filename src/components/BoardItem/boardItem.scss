@@ -1,6 +1,6 @@
 @import '../../style/utils/variables';
 
-.board-item {
+.board__item {
   width: 280px;
   min-height: 88px;
   background-color: $white;
@@ -13,10 +13,10 @@
       color: $main-purple;
     }
   }
-  &-title {
+  &__title {
     color: $black;
   }
-  &-subtask {
+  &__subtask {
     color: $medium-grey;
     margin-top: 8px;
   }
