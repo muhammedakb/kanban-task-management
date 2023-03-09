@@ -1,20 +1,20 @@
-.vertical-center {
+.horizontal-center {
   display: flex;
   align-items: center;
 }
 
-.horizontal-center {
+.vertical-center {
   display: flex;
   justify-content: center;
 }
 
 .center-flex {
-  @extend .vertical-center;
+  @extend .horizontal-center;
   justify-content: center;
 }
 
 .space-between {
-  @extend .vertical-center;
+  @extend .horizontal-center;
   justify-content: space-between;
 }
 

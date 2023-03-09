@@ -11,7 +11,7 @@ const BoardCategoryTitle = ({
   piece,
   text,
 }: BoardCategoryTitleProps) => (
-  <section className='category__title vertical-center'>
+  <section className='category__title horizontal-center'>
     <span
       className='category__title__color'
       style={{ backgroundColor: color }}

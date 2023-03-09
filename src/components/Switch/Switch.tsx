@@ -1,9 +1,9 @@
 import './switch.scss';
 
 type SwitchProps = {
-  checked?: boolean;
+  checked: boolean;
   id?: string;
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
 };
 
 const Switch = ({ checked, id, onChange }: SwitchProps) => (
