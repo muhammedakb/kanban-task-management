@@ -54,7 +54,7 @@ const Menu = ({ menuItems }: MenuProps) => {
             <p
               key={`menu-${item.text}-${item.variant}-${key}`}
               className={classNames(
-                'ellipsis__menu__item fw-500-md vertical-center',
+                'ellipsis__menu__item fw-500-md horizontal-center',
                 item.variant
               )}
               onClick={item.onClick}

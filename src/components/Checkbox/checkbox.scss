@@ -1,0 +1,27 @@
+@import '../../style/utils/variables';
+
+.checkbox {
+  width: 350px;
+  min-height: 40px;
+  padding: 12px;
+  background-color: $light-grey;
+  border-radius: 6px;
+  &:hover {
+    background-color: rgba(99, 95, 199, 0.25);
+    mix-blend-mode: normal;
+  }
+  &__input input[type='checkbox'] {
+    accent-color: $main-purple;
+    width: 1rem;
+    height: 1rem;
+    border: 1px solid rgba(130, 143, 163, 0.248914);
+    border-radius: 2px;
+  }
+  &__text {
+    margin-left: 1rem;
+    &.checked {
+      text-decoration-line: line-through;
+      color: rgba(0, 1, 18, 0.5);
+    }
+  }
+}
