@@ -1,13 +1,11 @@
 @import '../../style/utils/variables';
 @import '../../style/utils/typography';
-@import '../../style/utils/mix';
 
 .btn {
   width: 255px;
   color: $white;
   border: none;
   cursor: pointer;
-  @include center-flex;
   &.small {
     height: 40px;
     border-radius: 20px;

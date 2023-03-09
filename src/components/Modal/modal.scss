@@ -1,5 +1,4 @@
 @import '../../style/utils/variables';
-@import '../../style/utils/mix';
 
 .modal {
   &__backdrop {
@@ -9,22 +8,40 @@
     left: 0;
     right: 0;
     background-color: rgba(0, 0, 0, 0.5);
-    @include center-flex;
     z-index: 2;
   }
   &__content {
-    width: 480px;
+    width: 30rem;
     max-height: calc(100vh - 10%);
     padding: 2rem;
     border: 0;
     border-radius: 6px;
-    background-color: $dark-grey;
-    color: $white;
+    background-color: $white;
+    &__header {
+      position: relative;
+      min-height: 1.4375rem;
+      margin-bottom: 1.5rem;
+      &__title {
+        &.primary {
+          color: $black;
+        }
+        &.destructive {
+          color: $red;
+        }
+      }
+      &__close {
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+        position: absolute;
+        right: 0;
+      }
+    }
   }
 }
 
 @media screen and (min-width: 360px) and (max-width: 530px) {
   .modal__content {
-    width: 343px;
+    width: 21.4375rem;
   }
 }
