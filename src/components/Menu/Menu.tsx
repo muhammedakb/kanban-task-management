@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { useRef, useState } from 'react';
 import useOnClickOutside from '../../hooks/useOnClickOutside';
 import './menu.scss';
@@ -52,7 +53,10 @@ const Menu = ({ menuItems }: MenuProps) => {
           {menuItems.map((item, key) => (
             <p
               key={`menu-${item.text}-${item.variant}-${key}`}
-              className={`ellipsis__menu__item ${item.variant} fw-500-md`}
+              className={classNames(
+                'ellipsis__menu__item fw-500-md vertical-center',
+                item.variant
+              )}
               onClick={item.onClick}
             >
               {item.text}

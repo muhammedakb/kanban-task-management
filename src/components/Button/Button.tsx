@@ -20,7 +20,7 @@ const Button = ({
   variant = 'primary',
 }: ButtonProps) => (
   <button
-    className={classNames('btn', variant, size)}
+    className={classNames('btn center-flex', variant, size)}
     disabled={disabled}
     onClick={onClick}
   >

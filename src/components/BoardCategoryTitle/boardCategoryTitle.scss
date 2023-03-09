@@ -1,8 +1,6 @@
 @import '../../style/utils/variables';
-@import '../../style/utils/mix';
 
 .category__title {
-  @include vertical-center;
   &__color {
     display: inline-block;
     width: 15px;

@@ -1,25 +1,24 @@
-@mixin vertical-center {
+.vertical-center {
   display: flex;
   align-items: center;
 }
 
-@mixin horizontal-center {
+.horizontal-center {
   display: flex;
   justify-content: center;
 }
 
-@mixin center-flex {
-  @include vertical-center();
+.center-flex {
+  @extend .vertical-center;
   justify-content: center;
 }
 
-@mixin space-between {
-  display: flex;
-  align-items: center;
+.space-between {
+  @extend .vertical-center;
   justify-content: space-between;
 }
 
-@mixin flex-column {
+.flex-column {
   display: flex;
   flex-direction: column;
 }
