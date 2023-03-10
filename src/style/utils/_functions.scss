@@ -1,4 +1,9 @@
-@function calcRem($size) {
-  $remSize: $size / 16px;
-  @return $remSize * 1rem;
+@use 'sass:math';
+
+@function pixelToRem($pixel) {
+  @if math.is-unitless($pixel) {
+    @return math.div($pixel, 16) + rem;
+  } @else {
+    @error 'Don\t use units when using the rem() function; only numbers.';
+  }
 }

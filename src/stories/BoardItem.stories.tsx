@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import BoardItem from '../components/BoardItem';
 
 export default {
-  title: 'BoardItem',
+  title: 'Board Item',
   component: BoardItem,
 } as ComponentMeta<typeof BoardItem>;
 

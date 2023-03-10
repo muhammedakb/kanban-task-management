@@ -1,4 +1,5 @@
 @import '../../style/utils/variables';
+@import '../../style/utils/functions';
 
 .modal {
   &__backdrop {
@@ -19,8 +20,8 @@
     background-color: $white;
     &__header {
       position: relative;
-      min-height: 1.4375rem;
-      margin-bottom: 1.5rem;
+      min-height: pixelToRem(23);
+      margin-bottom: pixelToRem(24);
       &__title {
         &.primary {
           color: $black;
@@ -42,6 +43,6 @@
 
 @media screen and (min-width: 360px) and (max-width: 530px) {
   .modal__content {
-    width: 21.4375rem;
+    width: pixelToRem(343);
   }
 }

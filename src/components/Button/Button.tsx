@@ -8,6 +8,7 @@ type ButtonProps = {
   onClick?: () => void;
   size?: 'small' | 'large';
   text: string;
+  type?: 'button' | 'submit' | 'reset';
   variant?: 'primary' | 'secondary' | 'destructive';
 };
 
@@ -17,12 +18,14 @@ const Button = ({
   onClick,
   size = 'small',
   text,
+  type,
   variant = 'primary',
 }: ButtonProps) => (
   <button
     className={classNames('btn center-flex', variant, size)}
     disabled={disabled}
     onClick={onClick}
+    type={type}
   >
     {loading ? <Spinner /> : text}
   </button>
