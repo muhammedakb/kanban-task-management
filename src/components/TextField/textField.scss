@@ -1,0 +1,52 @@
+@import '../../style/utils/functions';
+@import '../../style/utils/variables';
+
+.textfield {
+  &__label {
+    position: relative;
+    max-width: pixelToRem(416);
+  }
+  &__label span {
+    display: inline-block;
+    color: $medium-grey;
+    margin-bottom: 0.5rem;
+  }
+  &__input,
+  &__textarea {
+    width: 100%;
+    min-width: pixelToRem(295);
+    border: 1px solid rgba(130, 143, 163, 0.25);
+    border-radius: 4px;
+    background-color: $white;
+    padding: 8px 16px 9px 16px;
+    // padding: 8px 113px 9px 16px;
+    color: $black;
+    outline: none;
+    &::placeholder {
+      mix-blend-mode: normal;
+      opacity: 0.35;
+    }
+    &:hover {
+      border-color: $main-purple;
+    }
+    &:focus {
+      border-color: $main-purple;
+    }
+    &.error {
+      border-color: $red;
+    }
+  }
+  &__input {
+    height: pixelToRem(40);
+  }
+  &__textarea {
+    height: pixelToRem(112);
+    resize: none;
+  }
+  &__validation {
+    position: absolute;
+    color: $red;
+    right: 1rem;
+    bottom: 9px;
+  }
+}

@@ -1,18 +1,19 @@
 @import '../../style/utils/variables';
 @import '../../style/utils/typography';
+@import '../../style/utils/functions';
 
 .btn {
-  width: 255px;
+  width: pixelToRem(255);
   color: $white;
   border: none;
   cursor: pointer;
   &.small {
-    height: 40px;
+    height: pixelToRem(40);
     border-radius: 20px;
     @extend .fw-700-sm;
   }
   &.large {
-    height: 48px;
+    height: pixelToRem(48);
     border-radius: 24px;
     @extend .fw-700-m;
   }

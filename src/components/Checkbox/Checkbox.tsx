@@ -7,26 +7,19 @@ type CheckboxProps = {
   text: string;
 };
 
-const Checkbox = ({ checked, onChange, text }: CheckboxProps) => {
-  return (
-    <div className='checkbox horizontal-center'>
-      <div className='checkbox__input'>
-        <input
-        //   className='checkbox__input'
-          type='checkbox'
-          checked={checked}
-          onChange={onChange}
-        />
-      </div>
-      <p
-        className={classNames('checkbox__text fw-700-xs', {
-          checked,
-        })}
-      >
-        {text}
-      </p>
+const Checkbox = ({ checked, onChange, text }: CheckboxProps) => (
+  <div className='checkbox horizontal-center'>
+    <div className='checkbox__input'>
+      <input type='checkbox' checked={checked} onChange={onChange} />
     </div>
-  );
-};
+    <p
+      className={classNames('checkbox__text fw-700-xs', {
+        checked,
+      })}
+    >
+      {text}
+    </p>
+  </div>
+);
 
 export default Checkbox;
