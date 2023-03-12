@@ -7,9 +7,9 @@ type SwitchProps = {
 };
 
 const Switch = ({ checked, id, onChange }: SwitchProps) => (
-  <label className='switch'>
-    <input type='checkbox' id={id} checked={checked} onChange={onChange} />
-    <span className='slider round'></span>
+  <label className="switch">
+    <input checked={checked} id={id} onChange={onChange} type="checkbox" />
+    <span className="slider round" />
   </label>
 );
 

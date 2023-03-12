@@ -1,5 +1,6 @@
-import classNames from 'classnames';
 import { useEffect, useRef } from 'react';
+import classNames from 'classnames';
+
 import './textField.scss';
 
 type TextFieldProps = {
@@ -15,13 +16,13 @@ type TextFieldProps = {
 };
 
 const TextField = ({
-  autoFocus,
+  autoFocus = false,
   errorMessage,
   label,
   name,
   onChange,
   placeholder,
-  textarea,
+  textarea = false,
   type = 'text',
   value,
 }: TextFieldProps) => {
@@ -36,36 +37,36 @@ const TextField = ({
   }, [autoFocus, textarea]);
 
   return (
-    <div className='textfield horizontal-center fw-500-md'>
-      <label className='textfield__label'>
-        <span className='fw-700-xs'>{label}</span>
+    <div className="textfield horizontal-center fw-500-md">
+      <label className="textfield__label">
+        <span className="fw-700-xs">{label}</span>
         {textarea ? (
           <textarea
+            ref={textareaRef}
             className={classNames('textfield__textarea', {
               error: errorMessage,
             })}
             name={name}
             onChange={onChange}
             placeholder={placeholder}
-            ref={textareaRef}
             value={value}
           />
         ) : (
           <input
+            ref={inputRef}
             className={classNames('textfield__input', {
               error: errorMessage,
             })}
             name={name}
             onChange={onChange}
             placeholder={placeholder}
-            ref={inputRef}
             type={type}
             value={value}
           />
         )}
-        {errorMessage ? (
-          <div className='textfield__validation'>{errorMessage}</div>
-        ) : null}
+        {Boolean(errorMessage) && (
+          <div className="textfield__validation">{errorMessage}</div>
+        )}
       </label>
     </div>
   );

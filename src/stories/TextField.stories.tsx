@@ -1,8 +1,10 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
-import TextField from '../components/TextField';
-import * as Yup from 'yup';
 import { Formik } from 'formik';
+import * as Yup from 'yup';
+
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
+
 import Button from '../components/Button';
+import TextField from '../components/TextField';
 
 export default {
   title: 'Text Field',
@@ -18,8 +20,8 @@ const validationSchema = Yup.object({
 const Template: ComponentStory<typeof TextField> = () => (
   <Formik
     initialValues={{ firstName: '', lastName: '', description: '' }}
-    validationSchema={validationSchema}
     onSubmit={(values) => console.log(values)}
+    validationSchema={validationSchema}
   >
     {({
       handleSubmit,
@@ -34,37 +36,37 @@ const Template: ComponentStory<typeof TextField> = () => (
           <TextField
             autoFocus
             errorMessage={errors.firstName}
-            label='Name'
-            name='firstName'
+            label="Name"
+            name="firstName"
             onChange={handleChange}
-            placeholder='Name'
+            placeholder="Name"
             value={values.firstName}
           />
           <TextField
             errorMessage={errors.lastName}
-            label='Lastname'
-            name='lastName'
+            label="Lastname"
+            name="lastName"
             onChange={handleChange}
-            placeholder='Lastname'
+            placeholder="Lastname"
             value={values.lastName}
           />
           <TextField
-            errorMessage={errors.description}
-            label='Description'
-            name='description'
-            onChange={handleChange}
-            placeholder='Enter your description...'
             textarea
+            errorMessage={errors.description}
+            label="Description"
+            name="description"
+            onChange={handleChange}
+            placeholder="Enter your description..."
             value={values.description}
           />
           <div style={{ marginTop: '1rem' }}>
-            <Button text='Login' type='submit' />
+            <Button text="Login" type="submit" />
           </div>
         </form>
         {isSubmitting && (
           <>
             <div>VALUES : {JSON.stringify(values)}</div>
-            <Button text='Clear' variant='destructive' onClick={resetForm} />
+            <Button onClick={resetForm} text="Clear" variant="destructive" />
           </>
         )}
       </>
