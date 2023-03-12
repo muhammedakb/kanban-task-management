@@ -43,7 +43,10 @@
       height: pixelToRem(47);
       margin: 0;
       padding-left: 1rem;
+      width: 100%;
+      border: none;
       cursor: pointer;
+      background-color: $white;
       &:hover {
         background-color: $light-grey;
       }

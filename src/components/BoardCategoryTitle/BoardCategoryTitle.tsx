@@ -11,12 +11,12 @@ const BoardCategoryTitle = ({
   piece,
   text,
 }: BoardCategoryTitleProps) => (
-  <section className='category__title horizontal-center'>
+  <section className="category__title horizontal-center">
     <span
-      className='category__title__color'
+      className="category__title__color"
       style={{ backgroundColor: color }}
     />
-    <span className='category__title__text fw-700-xs'>{`${text} (${piece})`}</span>
+    <span className="category__title__text fw-700-xs">{`${text} (${piece})`}</span>
   </section>
 );
 

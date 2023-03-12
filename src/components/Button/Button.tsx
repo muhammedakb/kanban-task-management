@@ -1,5 +1,7 @@
 import classNames from 'classnames';
+
 import Spinner from '../Spinner';
+
 import './button.scss';
 
 type ButtonProps = {
@@ -18,7 +20,7 @@ const Button = ({
   onClick,
   size = 'small',
   text,
-  type,
+  type = 'button',
   variant = 'primary',
 }: ButtonProps) => (
   <button

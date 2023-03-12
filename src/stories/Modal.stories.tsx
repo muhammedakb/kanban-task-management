@@ -1,5 +1,7 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { useState } from 'react';
+
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
+
 import Button from '../components/Button';
 import Modal from '../components/Modal';
 
@@ -8,16 +10,16 @@ export default {
   component: Modal,
 } as ComponentMeta<typeof Modal>;
 
-const Template: ComponentStory<typeof Modal> = (args) => {
+const Template: ComponentStory<typeof Modal> = () => {
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      <Button text='Open Modal' onClick={() => setOpen(true)} />
+      <Button onClick={() => setOpen(true)} text="Open Modal" />
       <Modal
-        visible={open}
-        toggle={() => setOpen(false)}
         title={{ text: 'Modal title' }}
+        toggle={() => setOpen(false)}
+        visible={open}
       >
         <p>
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus

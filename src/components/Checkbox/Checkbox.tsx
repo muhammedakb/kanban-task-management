@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+
 import './checkbox.scss';
 
 type CheckboxProps = {
@@ -8,9 +9,9 @@ type CheckboxProps = {
 };
 
 const Checkbox = ({ checked, onChange, text }: CheckboxProps) => (
-  <div className='checkbox horizontal-center'>
-    <div className='checkbox__input'>
-      <input type='checkbox' checked={checked} onChange={onChange} />
+  <div className="checkbox horizontal-center">
+    <div className="checkbox__input">
+      <input checked={checked} onChange={onChange} type="checkbox" />
     </div>
     <p
       className={classNames('checkbox__text fw-700-xs', {
