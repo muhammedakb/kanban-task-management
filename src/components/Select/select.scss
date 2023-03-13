@@ -1,0 +1,82 @@
+@import '../../style/utils/functions';
+@import '../../style/utils/variables';
+
+.select {
+  width: 100%;
+  max-width: pixelToRem(416);
+  min-width: pixelToRem(295);
+
+  &__label {
+    display: inline-block;
+    color: $medium-grey;
+    margin-bottom: 8px;
+  }
+
+  &__input {
+    height: pixelToRem(40);
+    padding: 8px 16px 9px 16px;
+    border: 1px solid rgba(130, 143, 163, 0.25);
+    border-radius: 4px;
+    cursor: pointer;
+    &.opened {
+      border-color: $main-purple;
+    }
+    &.opened &__icon {
+      transform: rotate(180deg);
+    }
+    &:hover {
+      border-color: $main-purple;
+    }
+    &__text {
+      color: $black;
+    }
+    &__icon {
+      display: inline-block;
+      width: pixelToRem(10);
+      height: pixelToRem(5);
+      transition: 0.35s;
+      background: no-repeat center url('../../assets/icon-chevron-down.svg');
+    }
+  }
+
+  &__options {
+    height: pixelToRem(117);
+    overflow-y: auto;
+    box-shadow: 0px 10px 20px rgba(54, 78, 126, 0.25);
+    margin-top: 7px;
+    border-radius: 8px;
+    &::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      background-color: $light-grey;
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar {
+      width: 4px;
+      background-color: $light-grey;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background-color: $main-purple-hover;
+    }
+    &__list {
+      list-style: none;
+      &__item__btn {
+        background-color: $white;
+        height: pixelToRem(39);
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        border-radius: 8px;
+        padding: 1rem;
+        &:hover {
+          background-color: $light-grey;
+        }
+        span {
+          color: $medium-grey;
+        }
+      }
+    }
+  }
+}
