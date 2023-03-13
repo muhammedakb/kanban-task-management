@@ -4,6 +4,7 @@
 .textfield {
   &__label {
     position: relative;
+    width: 100%;
     max-width: pixelToRem(416);
   }
   &__label span {

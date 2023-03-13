@@ -12,8 +12,8 @@ export default {
 } as ComponentMeta<typeof TextField>;
 
 const validationSchema = Yup.object({
-  firstName: Yup.string().required("Can't be empty"),
-  lastName: Yup.string().required("Can't be empty"),
+  firstName: Yup.string().required("Firstname can't be empty"),
+  lastName: Yup.string().required("Lastname can't be empty"),
   description: Yup.string().min(10, 'Must be more than 10'),
 });
 
