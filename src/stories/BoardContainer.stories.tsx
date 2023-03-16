@@ -14,7 +14,11 @@ const Template: ComponentStory<typeof BoardContainer> = () => (
     {dummyData.boards
       .filter((board) => board.name === 'Platform Launch')[0]
       .columns.map((column) => (
-        <BoardColumn key={column.name} columnData={column} />
+        <BoardColumn
+          key={column.name}
+          columnData={column}
+          onItemClick={(item) => console.log('ITEM', item)}
+        />
       ))}
   </BoardContainer>
 );

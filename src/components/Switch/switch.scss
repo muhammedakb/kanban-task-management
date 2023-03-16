@@ -26,6 +26,9 @@
     background-color: $main-purple;
     -webkit-transition: 0.2s;
     transition: 0.2s;
+    &:hover {
+      background-color: $main-purple-hover;
+    }
     &::before {
       position: absolute;
       content: '';

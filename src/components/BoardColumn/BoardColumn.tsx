@@ -8,9 +8,10 @@ import './boardColumn.scss';
 
 type BoardColumnProps = {
   columnData: ColumnData;
+  onItemClick: (item: ColumnData['tasks'][0]) => void;
 };
 
-const BoardColumn: FC<BoardColumnProps> = ({ columnData }) => (
+const BoardColumn: FC<BoardColumnProps> = ({ columnData, onItemClick }) => (
   <section className="board__column">
     <header className="board__column__title">
       <BoardCategoryTitle
@@ -29,6 +30,7 @@ const BoardColumn: FC<BoardColumnProps> = ({ columnData }) => (
           <BoardItem
             key={item.title}
             completedSubTasks={completedSubTasks}
+            onItemClick={() => onItemClick(item)}
             subTasks={item.subtasks.length}
             taskTitle={item.title}
           />
