@@ -1,0 +1,52 @@
+@import '../../style/utils/variables';
+@import '../../style/utils/functions';
+
+.bar__item {
+  width: pixelToRem(276);
+  height: pixelToRem(48);
+  background-color: $white;
+  color: $medium-grey;
+  border: none;
+  border-radius: 0px 100px 100px 0px;
+  cursor: pointer;
+  &.createBtn {
+    color: $main-purple;
+    .bar__item__icon {
+      background: url('../../assets/icon-board-active.svg');
+    }
+  }
+  &.active {
+    color: $white;
+    background-color: $main-purple;
+    .bar__item__icon {
+      background: url('../../assets/icon-board-light.svg');
+    }
+  }
+  &:hover {
+    background-color: rgba(99, 95, 199, 0.1);
+    color: $main-purple;
+    .bar__item__icon {
+      background: url('../../assets/icon-board-active.svg');
+    }
+  }
+  &__icon {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    margin-left: 2rem;
+    background: url('../../assets/icon-board.svg');
+  }
+  &__text {
+    margin-left: 1rem;
+    margin-bottom: 3px;
+  }
+  &.hideSidebar {
+    .bar__item__icon {
+      width: pixelToRem(18);
+      background: url('../../assets/icon-hide-sidebar.svg');
+    }
+    &:hover .bar__item__icon {
+      background: url('../../assets/icon-hide-sidebar-hover.svg');
+    }
+  }
+}

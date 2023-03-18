@@ -27,7 +27,7 @@ export type MenuProps = {
     onClick: () => void;
   }>;
 };
-
+// TODO: fix menu position problem
 const Menu = ({ menuItems }: MenuProps) => {
   const ellipsisRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef(null);

@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import type { FC } from 'react';
 
 import useWindowSize from '../../hooks/useWindowSize';
@@ -46,4 +47,4 @@ const Header: FC<HeaderProps> = ({
   );
 };
 
-export default Header;
+export default memo(Header);
