@@ -41,7 +41,7 @@
   }
 }
 
-@media screen and (min-width: 360px) and (max-width: 530px) {
+@media screen and (max-width: 530px) {
   .modal__content {
     width: pixelToRem(343);
   }

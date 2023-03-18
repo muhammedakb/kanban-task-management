@@ -1,0 +1,57 @@
+@import '../../style/utils/variables';
+@import '../../style/utils/functions';
+@import '../../style/utils/typography';
+
+.header {
+  height: pixelToRem(97);
+  // max-width: pixelToRem(1440);
+  padding-right: pixelToRem(32);
+  &__logo {
+    width: pixelToRem(209);
+    height: 100%;
+    background: no-repeat center url('../../assets/logo-dark.svg');
+    border-right: 1px solid $lines-light;
+  }
+  &__title {
+    margin-left: pixelToRem(32);
+    @extend .fw-700-xl;
+  }
+  &__process {
+    margin-left: auto;
+    column-gap: pixelToRem(24);
+  }
+}
+
+@media screen and (min-width: 426px) and (max-width: 768px) {
+  .header {
+    height: pixelToRem(80);
+    &__logo {
+      width: pixelToRem(40);
+      background: no-repeat center url('../../assets/logo-mobile.svg');
+      border-right: none;
+    }
+    &__title {
+      margin-left: pixelToRem(6);
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 25px;
+    }
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .header {
+    height: pixelToRem(64);
+    &__logo {
+      width: pixelToRem(40);
+      background: no-repeat center url('../../assets/logo-mobile.svg');
+      border-right: none;
+    }
+    &__title {
+      margin-left: pixelToRem(6);
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 23px;
+    }
+  }
+}

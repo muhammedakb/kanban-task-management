@@ -8,8 +8,8 @@ type ButtonProps = {
   disabled?: boolean;
   loading?: boolean;
   onClick?: () => void;
-  size?: 'small' | 'large';
-  text: string;
+  size?: 'xsmall' | 'small' | 'large';
+  text: string | JSX.Element;
   type?: 'button' | 'submit' | 'reset';
   variant?: 'primary' | 'secondary' | 'destructive';
 };
@@ -29,7 +29,11 @@ const Button = ({
     onClick={onClick}
     type={type}
   >
-    {loading ? <Spinner /> : text}
+    {loading ? (
+      <Spinner />
+    ) : (
+      <span>{typeof text === 'string' ? text : <text />}</span>
+    )}
   </button>
 );
 

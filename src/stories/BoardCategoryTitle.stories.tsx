@@ -3,7 +3,7 @@ import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import BoardCategoryTitle from '../components/BoardCategoryTitle';
 
 export default {
-  title: 'Board Category Title',
+  title: 'Board',
   component: BoardCategoryTitle,
 } as ComponentMeta<typeof BoardCategoryTitle>;
 
