@@ -1,0 +1,22 @@
+@import '../../style/utils/variables';
+@import '../../style/utils/functions';
+
+.theme-selector {
+  width: pixelToRem(251);
+  height: pixelToRem(48);
+  padding: 0 65px;
+  background-color: $light-grey;
+  border-radius: 6px;
+  &__light-icon {
+    display: inline-block;
+    width: pixelToRem(18.33);
+    height: pixelToRem(18.33);
+    background: url('../../assets/icon-light-theme.svg');
+  }
+  &__dark-icon {
+    display: inline-block;
+    width: pixelToRem(16);
+    height: pixelToRem(16);
+    background: url('../../assets/icon-dark-theme.svg');
+  }
+}
