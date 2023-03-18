@@ -20,7 +20,7 @@ const Ellipsis = () => (
   </svg>
 );
 
-type MenuProps = {
+export type MenuProps = {
   menuItems: Array<{
     text: string;
     variant: 'primary' | 'danger';
