@@ -1,0 +1,56 @@
+@import '../../style/utils/variables';
+@import '../../style/utils/functions';
+
+.board-bar {
+  width: pixelToRem(300);
+  height: 100vh;
+  min-height: pixelToRem(490);
+  padding: 33px 24px 32px 0;
+  position: relative;
+  &__logo {
+    width: pixelToRem(153);
+    height: pixelToRem(25.5);
+    background-image: url('../../assets/logo-dark.svg');
+    margin-left: pixelToRem(34);
+  }
+  &__items {
+    margin-top: pixelToRem(54);
+    &__title {
+      margin-left: pixelToRem(32);
+      padding-bottom: pixelToRem(19);
+      color: $medium-grey;
+    }
+  }
+  &__footer {
+    position: absolute;
+    bottom: pixelToRem(32);
+    .theme-selector {
+      margin-left: pixelToRem(24);
+      margin-bottom: 0.5rem;
+    }
+  }
+  &__show-sidebar {
+    width: pixelToRem(56);
+    height: pixelToRem(48);
+    position: absolute;
+    bottom: 2rem;
+    background-color: $main-purple;
+    border: none;
+    border-radius: 0px 100px 100px 0px;
+    cursor: pointer;
+    &:hover {
+      background-color: $main-purple-hover;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .board-bar {
+    width: pixelToRem(260);
+    &__footer {
+      .theme-selector {
+        margin-left: pixelToRem(12);
+      }
+    }
+  }
+}

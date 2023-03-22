@@ -1,6 +1,7 @@
 import { memo } from 'react';
 import type { FC } from 'react';
 
+import { useNavbarVisibility } from '../../context/NavbarVisibilityProvider';
 import useWindowSize from '../../hooks/useWindowSize';
 import Button from '../Button';
 import Menu from '../Menu';
@@ -18,22 +19,18 @@ const AddIcon = () => (
 );
 
 type HeaderProps = {
-  navMenuVisible?: boolean;
   menuItems: MenuProps['menuItems'];
   onAddNewTaskClick: () => void;
   title: string;
 };
 
-const Header: FC<HeaderProps> = ({
-  menuItems,
-  navMenuVisible = true,
-  onAddNewTaskClick,
-  title,
-}) => {
+const Header: FC<HeaderProps> = ({ menuItems, onAddNewTaskClick, title }) => {
   const { width } = useWindowSize();
+  const { isOpened } = useNavbarVisibility();
+
   return (
     <header className="header horizontal-center">
-      {(navMenuVisible || width < 570) && <div className="header__logo" />}
+      {!isOpened && <div className="header__logo" />}
       <div className="header__title">{title}</div>
       <div className="header__process horizontal-center">
         <Button

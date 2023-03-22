@@ -50,3 +50,9 @@
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .bar__item {
+    width: pixelToRem(240);
+  }
+}
