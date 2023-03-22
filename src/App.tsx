@@ -1,7 +1,15 @@
+import BoardBar from './components/BoardBar';
+
 const App = () => (
   <div>
-    <h1 className="fw-500-md">Kanban task management</h1>
-    <div className="content" />
+    <BoardBar
+      boardItems={[
+        { text: 'Platform Launch', onClick: () => {} },
+        { text: 'Marketing Plan', onClick: () => {} },
+        { text: 'Roadmap', onClick: () => {} },
+      ]}
+      onCreate={() => {}}
+    />
   </div>
 );
 
