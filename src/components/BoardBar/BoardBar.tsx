@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import type { FC } from 'react';
 
+import { useNavbarVisibility } from '../../context/NavbarVisibilityProvider';
 import BoardBarItem from '../BoardBarItem';
 import ThemeSelector from '../ThemeSelector';
 
@@ -21,17 +21,9 @@ const ShowIcon = () => (
 );
 
 const BoardBar: FC<BoardBarProps> = ({ boardItems, onCreate }) => {
-  const [isHiding, setIsHiding] = useState(false);
+  const { isOpened, setIsOpened } = useNavbarVisibility();
 
-  const toggle = () => {
-    setIsHiding((prevState) => !prevState);
-  };
-
-  return isHiding ? (
-    <button className="board-bar__show-sidebar center-flex" onClick={toggle}>
-      <ShowIcon />
-    </button>
-  ) : (
+  return isOpened ? (
     <section className="board-bar">
       <header className="board-bar__logo" />
       <main className="board-bar__items">
@@ -51,9 +43,20 @@ const BoardBar: FC<BoardBarProps> = ({ boardItems, onCreate }) => {
       </main>
       <footer className="board-bar__footer">
         <ThemeSelector />
-        <BoardBarItem onClick={toggle} text="Hide Sidebar" type="hideSidebar" />
+        <BoardBarItem
+          onClick={setIsOpened}
+          text="Hide Sidebar"
+          type="hideSidebar"
+        />
       </footer>
     </section>
+  ) : (
+    <button
+      className="board-bar__show-sidebar center-flex"
+      onClick={setIsOpened}
+    >
+      <ShowIcon />
+    </button>
   );
 };
 

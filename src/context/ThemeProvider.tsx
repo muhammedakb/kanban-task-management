@@ -9,12 +9,12 @@ type Theme = 'dark' | 'light';
 
 type ThemeContextType = {
   theme: Theme;
-  setTheme: () => void;
+  toggleTheme: () => void;
 };
 
 const ThemeContext = createContext<ThemeContextType>({
   theme: 'light',
-  setTheme: () => {},
+  toggleTheme: () => {},
 });
 
 const ThemeProvider = ({ children }: ThemeContextProps) => {
@@ -27,13 +27,13 @@ const ThemeProvider = ({ children }: ThemeContextProps) => {
   return (
     <ThemeContext.Provider
       // eslint-disable-next-line react/jsx-no-constructed-context-values
-      value={{ theme, setTheme: toggleTheme }}
+      value={{ theme, toggleTheme }}
     >
       {children}
     </ThemeContext.Provider>
   );
 };
 
-const useTheme = (): ThemeContextType => useContext(ThemeContext);
+const useTheme = () => useContext(ThemeContext);
 
 export { ThemeProvider, useTheme };
