@@ -54,5 +54,8 @@
 @media screen and (max-width: 768px) {
   .bar__item {
     width: pixelToRem(240);
+    &__icon {
+      margin-left: 1.5rem;
+    }
   }
 }

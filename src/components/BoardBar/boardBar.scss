@@ -44,6 +44,24 @@
   }
 }
 
+.mobile-board-bar {
+  width: 100vw;
+  height: calc(100vh - 64px);
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+  padding-top: 1rem;
+  align-items: flex-start;
+  &__menu {
+    width: pixelToRem(264);
+    height: pixelToRem(322);
+    padding-top: 1rem;
+    position: relative;
+    background-color: $white;
+    box-shadow: 0px 10px 20px rgba(54, 78, 126, 0.25);
+    border-radius: 8px;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .board-bar {
     width: pixelToRem(260);
@@ -51,6 +69,20 @@
       .theme-selector {
         margin-left: pixelToRem(12);
       }
+    }
+  }
+}
+
+@media screen and (max-width: 570px) {
+  .board-bar {
+    &__items {
+      margin-top: 0;
+      &__title {
+        margin-left: 1.5rem;
+      }
+    }
+    &__footer {
+      bottom: 0.5rem;
     }
   }
 }
