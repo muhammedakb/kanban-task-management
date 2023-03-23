@@ -15,6 +15,10 @@
   &__title {
     margin-left: pixelToRem(32);
     @extend .fw-700-xl;
+    svg {
+      margin-top: pixelToRem(5);
+      margin-left: pixelToRem(9);
+    }
   }
   &__process {
     margin-left: auto;
@@ -42,16 +46,21 @@
 @media screen and (max-width: 425px) {
   .header {
     height: pixelToRem(64);
+    padding-right: 1rem;
     &__logo {
       width: pixelToRem(40);
       background: no-repeat center url('../../assets/logo-mobile.svg');
       border-right: none;
+      margin-left: pixelToRem(6);
     }
     &__title {
       margin-left: pixelToRem(6);
       font-size: 18px;
       font-weight: 700;
       line-height: 23px;
+    }
+    &__process {
+      column-gap: 1rem;
     }
   }
 }

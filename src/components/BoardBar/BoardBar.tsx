@@ -1,12 +1,15 @@
 import type { FC } from 'react';
+import { createPortal } from 'react-dom';
 
 import { useNavbarVisibility } from '../../context/NavbarVisibilityProvider';
 import BoardBarItem from '../BoardBarItem';
 import ThemeSelector from '../ThemeSelector';
 
+import MobileBoardBar from './MobileBoardBar';
+
 import './boardBar.scss';
 
-type BoardBarProps = {
+export type BoardBarProps = {
   boardItems: Array<{ text: string; onClick: () => void }>;
   onCreate: () => void;
 };
@@ -21,43 +24,55 @@ const ShowIcon = () => (
 );
 
 const BoardBar: FC<BoardBarProps> = ({ boardItems, onCreate }) => {
-  const { isOpened, setIsOpened } = useNavbarVisibility();
+  const { isMobileMenu, isOpened, setIsOpened } = useNavbarVisibility();
 
-  return isOpened ? (
-    <section className="board-bar">
-      <header className="board-bar__logo" />
-      <main className="board-bar__items">
-        <p className="board-bar__items__title fw-700-xs">ALL BOARDS (3)</p>
-        {(boardItems ?? []).map((item) => (
+  if (isMobileMenu && isOpened) {
+    return createPortal(
+      <MobileBoardBar boardItems={boardItems} onCreate={onCreate} />,
+      document.body
+    );
+  }
+
+  if (!isMobileMenu) {
+    return isOpened ? (
+      <section className="board-bar">
+        <header className="board-bar__logo" />
+        <main className="board-bar__items">
+          <p className="board-bar__items__title fw-700-xs">
+            ALL BOARDS ({boardItems.length})
+          </p>
+          {(boardItems ?? []).map((item) => (
+            <BoardBarItem
+              key={item.text}
+              onClick={item.onClick}
+              text={item.text}
+            />
+          ))}
           <BoardBarItem
-            key={item.text}
-            onClick={item.onClick}
-            text={item.text}
+            isCreateButton
+            onClick={onCreate}
+            text="+ Create New Board"
           />
-        ))}
-        <BoardBarItem
-          isCreateButton
-          onClick={onCreate}
-          text="+ Create New Board"
-        />
-      </main>
-      <footer className="board-bar__footer">
-        <ThemeSelector />
-        <BoardBarItem
-          onClick={setIsOpened}
-          text="Hide Sidebar"
-          type="hideSidebar"
-        />
-      </footer>
-    </section>
-  ) : (
-    <button
-      className="board-bar__show-sidebar center-flex"
-      onClick={setIsOpened}
-    >
-      <ShowIcon />
-    </button>
-  );
+        </main>
+        <footer className="board-bar__footer">
+          <ThemeSelector />
+          <BoardBarItem
+            onClick={setIsOpened}
+            text="Hide Sidebar"
+            type="hideSidebar"
+          />
+        </footer>
+      </section>
+    ) : (
+      <button
+        className="board-bar__show-sidebar center-flex"
+        onClick={setIsOpened}
+      >
+        <ShowIcon />
+      </button>
+    );
+  }
+  return null;
 };
 
 export default BoardBar;

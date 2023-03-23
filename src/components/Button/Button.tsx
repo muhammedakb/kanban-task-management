@@ -29,11 +29,7 @@ const Button = ({
     onClick={onClick}
     type={type}
   >
-    {loading ? (
-      <Spinner />
-    ) : (
-      <span>{typeof text === 'string' ? text : <text />}</span>
-    )}
+    {loading ? <Spinner /> : <span>{text}</span>}
   </button>
 );
 
