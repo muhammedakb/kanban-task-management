@@ -10,7 +10,7 @@ import MobileBoardBar from './MobileBoardBar';
 import './boardBar.scss';
 
 export type BoardBarProps = {
-  boardItems: Array<{ text: string; onClick: () => void }>;
+  boardItems: Array<{ text: string; onClick?: () => void }>;
   onCreate: () => void;
 };
 
@@ -44,7 +44,7 @@ const BoardBar: FC<BoardBarProps> = ({ boardItems, onCreate }) => {
           {(boardItems ?? []).map((item) => (
             <BoardBarItem
               key={item.text}
-              onClick={item.onClick}
+              onClick={() => item.onClick?.()}
               text={item.text}
             />
           ))}

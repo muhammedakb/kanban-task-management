@@ -9,6 +9,7 @@
   border: none;
   border-radius: 0px 100px 100px 0px;
   cursor: pointer;
+  text-decoration: none;
   &.createBtn {
     color: $main-purple;
     .bar__item__icon {
@@ -22,7 +23,7 @@
       background: url('../../assets/icon-board-light.svg');
     }
   }
-  &:hover {
+  &:not(.active):hover {
     background-color: rgba(99, 95, 199, 0.1);
     color: $main-purple;
     .bar__item__icon {

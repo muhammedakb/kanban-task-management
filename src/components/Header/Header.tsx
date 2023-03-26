@@ -42,8 +42,7 @@ const Header: FC<HeaderProps> = ({ menuItems, onAddNewTaskClick, title }) => {
 
   const toggleMobileBar = useCallback(() => {
     if (width < 570) setIsOpened();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [width]);
+  }, [width, setIsOpened]);
 
   return (
     <header className="header horizontal-center">
@@ -52,7 +51,8 @@ const Header: FC<HeaderProps> = ({ menuItems, onAddNewTaskClick, title }) => {
         className="header__title horizontal-center"
         onClick={toggleMobileBar}
       >
-        {title} {width < 570 && (isOpened ? <ChevronUp /> : <ChevronDown />)}
+        {title || 'Not Found'}
+        {width < 570 && (isOpened ? <ChevronUp /> : <ChevronDown />)}
       </div>
       <div className="header__process horizontal-center">
         <Button

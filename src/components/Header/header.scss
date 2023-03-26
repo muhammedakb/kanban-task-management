@@ -5,7 +5,9 @@
 .header {
   height: pixelToRem(97);
   // max-width: pixelToRem(1440);
+  // width: calc(100% - 260px);
   padding-right: pixelToRem(32);
+  border-bottom: 1px solid $lines-light;
   &__logo {
     width: pixelToRem(209);
     height: 100%;

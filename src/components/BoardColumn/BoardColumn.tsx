@@ -7,15 +7,20 @@ import BoardItem from '../BoardItem';
 import './boardColumn.scss';
 
 type BoardColumnProps = {
+  categoryTitleColor: string;
   columnData: ColumnData;
   onItemClick: (item: ColumnData['tasks'][0]) => void;
 };
 
-const BoardColumn: FC<BoardColumnProps> = ({ columnData, onItemClick }) => (
+const BoardColumn: FC<BoardColumnProps> = ({
+  categoryTitleColor,
+  columnData,
+  onItemClick,
+}) => (
   <section className="board__column">
     <header className="board__column__title">
       <BoardCategoryTitle
-        color="#49C4E5"
+        color={categoryTitleColor}
         piece={columnData.tasks.length}
         text={columnData.name}
       />

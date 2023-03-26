@@ -1,4 +1,10 @@
-import { createContext, useCallback, useContext, useState } from 'react';
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
+} from 'react';
 import type { ReactNode } from 'react';
 
 type ThemeContextProps = {
@@ -24,13 +30,10 @@ const ThemeProvider = ({ children }: ThemeContextProps) => {
     setTheme((prevTheme) => (prevTheme === 'dark' ? 'light' : 'dark'));
   }, []);
 
+  const value = useMemo(() => ({ theme, toggleTheme }), [theme, toggleTheme]);
+
   return (
-    <ThemeContext.Provider
-      // eslint-disable-next-line react/jsx-no-constructed-context-values
-      value={{ theme, toggleTheme }}
-    >
-      {children}
-    </ThemeContext.Provider>
+    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
   );
 };
 

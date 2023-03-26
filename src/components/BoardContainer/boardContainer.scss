@@ -6,6 +6,8 @@
   background-color: $light-grey;
   display: flex;
   column-gap: pixelToRem(24);
+  height: calc(100vh - pixelToRem(97));
+  overflow-x: auto;
   &__new-column {
     min-width: pixelToRem(280);
     margin-top: pixelToRem(39);
@@ -20,5 +22,17 @@
     &:hover {
       color: $main-purple;
     }
+  }
+}
+
+@media screen and (min-width: 426px) and (max-width: 768px) {
+  .container {
+    height: calc(100vh - pixelToRem(80));
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .container {
+    height: calc(100vh - pixelToRem(64));
   }
 }
