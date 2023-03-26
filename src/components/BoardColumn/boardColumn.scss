@@ -1,4 +1,7 @@
+@import '../../style/utils/functions';
+
 .board__column {
+  min-width: pixelToRem(280);
   &__items {
     margin-top: 24px;
     row-gap: 20px;

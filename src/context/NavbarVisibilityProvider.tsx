@@ -3,6 +3,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
   useState,
 } from 'react';
 import type { ReactNode } from 'react';
@@ -43,11 +44,13 @@ const NavbarVisibilityProvider = ({ children }: NavbarVisibilityProps) => {
     return () => setIsMobileMenu(false);
   }, [width]);
 
+  const value = useMemo(
+    () => ({ isMobileMenu, isOpened, setIsOpened: toggleVisibility }),
+    [isMobileMenu, isOpened, toggleVisibility]
+  );
+
   return (
-    <NavbarVisibilityContext.Provider
-      // eslint-disable-next-line react/jsx-no-constructed-context-values
-      value={{ isMobileMenu, isOpened, setIsOpened: toggleVisibility }}
-    >
+    <NavbarVisibilityContext.Provider value={value}>
       {children}
     </NavbarVisibilityContext.Provider>
   );

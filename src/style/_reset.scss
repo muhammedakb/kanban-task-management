@@ -17,6 +17,7 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   font-family: 'Plus Jakarta Sans', sans-serif;
+  // display: flex;
 }
 
 img,
@@ -47,4 +48,22 @@ h6 {
 
 #root {
   isolation: isolate;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.main {
+  width: 100%;
+  &.isOpened {
+    width: calc(100% - 300px);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .main {
+    &.isOpened {
+      width: calc(100% - 260px);
+    }
+  }
 }

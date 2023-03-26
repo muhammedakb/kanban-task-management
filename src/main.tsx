@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 
 import { NavbarVisibilityProvider } from './context/NavbarVisibilityProvider';
 import { ThemeProvider } from './context/ThemeProvider';
-import App from './App';
+import Router from './router';
 
 import './style/main.scss';
 
@@ -11,7 +11,7 @@ createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>
     <ThemeProvider>
       <NavbarVisibilityProvider>
-        <App />
+        <Router />
       </NavbarVisibilityProvider>
     </ThemeProvider>
   </StrictMode>
