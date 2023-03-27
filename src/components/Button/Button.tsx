@@ -8,7 +8,7 @@ type ButtonProps = {
   disabled?: boolean;
   loading?: boolean;
   onClick?: () => void;
-  size?: 'xsmall' | 'small' | 'large';
+  size?: 'xsmall' | 'small' | 'medium' | 'large';
   text: string | JSX.Element;
   type?: 'button' | 'submit' | 'reset';
   variant?: 'primary' | 'secondary' | 'destructive';

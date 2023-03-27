@@ -2,12 +2,11 @@ import { useMemo } from 'react';
 import classNames from 'classnames';
 import { Outlet, useLocation } from 'react-router-dom';
 
-import data from '../data/data.json';
-
-import BoardBar from './components/BoardBar';
-import Header from './components/Header';
-import { useNavbarVisibility } from './context/NavbarVisibilityProvider';
-import { deslugify } from './utils';
+import data from '../../../data/data.json';
+import BoardBar from '../../components/BoardBar';
+import Header from '../../components/Header';
+import { useNavbarVisibility } from '../../context/NavbarVisibilityProvider';
+import { deslugify } from '../../utils';
 
 const Layout = () => {
   const { pathname } = useLocation();

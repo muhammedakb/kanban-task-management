@@ -89,3 +89,10 @@
     }
   }
 }
+
+@media screen and (max-width: 425px) {
+  .mobile-board-bar {
+    height: calc(100vh - pixelToRem(64));
+    top: pixelToRem(64);
+  }
+}

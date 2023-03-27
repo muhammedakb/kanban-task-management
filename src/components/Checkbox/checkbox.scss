@@ -2,7 +2,6 @@
 @import '../../style/utils/functions';
 
 .checkbox {
-  width: pixelToRem(350);
   min-height: pixelToRem(40);
   padding: 12px;
   background-color: $light-grey;
@@ -11,7 +10,7 @@
     background-color: rgba(99, 95, 199, 0.25);
     mix-blend-mode: normal;
   }
-  &__input input[type='checkbox'] {
+  input[type='checkbox'] {
     accent-color: $main-purple;
     width: 1rem;
     height: 1rem;

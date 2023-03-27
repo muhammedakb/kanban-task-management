@@ -3,19 +3,15 @@ import classNames from 'classnames';
 import type { ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 
-import './modal.scss';
+import useOnClickOutside from '../../hooks/useOnClickOutside';
+import Menu from '../Menu';
+import type { MenuProps } from '../Menu/Menu';
 
-const CloseIcon = () => (
-  <svg height="15" width="15" xmlns="http://www.w3.org/2000/svg">
-    <g fill="#828FA3" fillRule="evenodd">
-      <path d="m12.728 0 2.122 2.122L2.122 14.85 0 12.728z" />
-      <path d="M0 2.122 2.122 0 14.85 12.728l-2.122 2.122z" />
-    </g>
-  </svg>
-);
+import './modal.scss';
 
 type ModalProps = {
   children: ReactNode;
+  menuItems?: MenuProps['menuItems'];
   toggle?: () => void;
   title?: {
     text: string;
@@ -24,17 +20,19 @@ type ModalProps = {
   visible: boolean;
 };
 
-const Modal = ({ children, toggle, title, visible }: ModalProps) => {
+const Modal = ({ children, menuItems, toggle, title, visible }: ModalProps) => {
   const modalRef = useRef(null);
+
+  useOnClickOutside(
+    modalRef,
+    () => toggle?.(),
+    (event) => (event?.target as Record<string, any>)?.id === 'root_modal'
+  );
 
   return visible
     ? createPortal(
-        <div
-          ref={modalRef}
-          className="modal__backdrop center-flex"
-          id="root_modal"
-        >
-          <main className="modal__content">
+        <div className="modal__backdrop center-flex" id="root_modal">
+          <main ref={modalRef} className="modal__content">
             <header className="modal__content__header space-between">
               {title ? (
                 <p
@@ -46,14 +44,15 @@ const Modal = ({ children, toggle, title, visible }: ModalProps) => {
                   {title.text}
                 </p>
               ) : null}
-              <button
-                className="modal__content__header__close"
-                onClick={toggle}
-                title="Close"
-                type="button"
-              >
-                <CloseIcon />
-              </button>
+              {menuItems && menuItems.length > 0 && (
+                <button
+                  className="modal__content__header__close"
+                  title="Menu"
+                  type="button"
+                >
+                  <Menu menuItems={menuItems ?? []} />
+                </button>
+              )}
             </header>
             {children}
           </main>

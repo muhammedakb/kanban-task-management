@@ -7,11 +7,6 @@ type Props = {
 };
 
 const BoardContainer = ({ children }: Props) => (
-  <main className="container">
-    {children}
-    <section className="container__new-column fw-700-xl center-flex">
-      + New Column
-    </section>
-  </main>
+  <main className="container">{children}</main>
 );
 export default BoardContainer;
