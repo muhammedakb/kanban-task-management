@@ -55,6 +55,7 @@ const Header: FC<HeaderProps> = ({ menuItems, onAddNewTaskClick, title }) => {
         {width < 570 && (isOpened ? <ChevronUp /> : <ChevronDown />)}
       </div>
       <div className="header__process horizontal-center">
+        {/* TODO: disable if no column data. */}
         <Button
           onClick={onAddNewTaskClick}
           size={width > 570 ? 'small' : 'xsmall'}

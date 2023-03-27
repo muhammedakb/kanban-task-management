@@ -32,7 +32,7 @@
     background: url('../../assets/icon-dark-theme.svg');
     &.active {
       background: url('../../assets/icon-dark-theme-active.svg');
-      animation: translate 0.7s ease-in-out;
+      animation: translate 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55);
       @keyframes translate {
         0% {
           transform: translateY(20px);

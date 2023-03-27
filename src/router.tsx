@@ -2,8 +2,8 @@ import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 
 import data from '../data/data.json';
 
-import Container from './Container';
-import Layout from './Layout';
+import Container from './layout/Container/Container';
+import Layout from './layout/Layout/Layout';
 import { slugify } from './utils';
 
 function NoMatch() {

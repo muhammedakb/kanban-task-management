@@ -23,6 +23,7 @@
       min-height: pixelToRem(23);
       margin-bottom: pixelToRem(24);
       &__title {
+        width: pixelToRem(387);
         &.primary {
           color: $black;
         }

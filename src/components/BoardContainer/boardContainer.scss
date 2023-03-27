@@ -8,6 +8,21 @@
   column-gap: pixelToRem(24);
   height: calc(100vh - pixelToRem(97));
   overflow-x: auto;
+  &::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: $light-grey;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar {
+    height: 8px;
+    background-color: $light-grey;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: $main-purple-hover;
+  }
   &__new-column {
     min-width: pixelToRem(280);
     margin-top: pixelToRem(39);
@@ -21,6 +36,14 @@
     cursor: pointer;
     &:hover {
       color: $main-purple;
+    }
+  }
+  &__empty-board {
+    width: 100%;
+    p {
+      color: $medium-grey;
+      margin-bottom: 2rem;
+      text-align: center;
     }
   }
 }

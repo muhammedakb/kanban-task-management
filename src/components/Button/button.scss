@@ -18,6 +18,12 @@
     border-radius: 20px;
     @extend .fw-700-sm;
   }
+  &.medium {
+    height: pixelToRem(48);
+    width: pixelToRem(174);
+    border-radius: 24px;
+    @extend .fw-700-m;
+  }
   &.large {
     height: pixelToRem(48);
     border-radius: 24px;
