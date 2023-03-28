@@ -2,11 +2,11 @@ import type { ReactNode } from 'react';
 
 import './boardContainer.scss';
 
-type Props = {
+type BoardContainerProps = {
   children: ReactNode;
 };
 
-const BoardContainer = ({ children }: Props) => (
+const BoardContainer = ({ children }: BoardContainerProps) => (
   <main className="container">{children}</main>
 );
 export default BoardContainer;

@@ -1,0 +1,44 @@
+@import '../../style/utils/variables';
+@import '../../style/utils/functions';
+
+.no-match {
+  height: calc(100vh - pixelToRem(97));
+  background-image: url('../../assets/undraw_no_data_re_kwbl.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 75%;
+  background-color: $light-grey;
+  &__main {
+    background-color: $light-grey;
+    padding: 2rem;
+    border: 2px solid $black;
+    border-radius: 15px;
+    &__redirect {
+      margin-top: 1rem;
+      text-decoration: none;
+      color: $main-purple;
+      &:hover {
+        color: $main-purple-hover;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .no-match {
+    background-size: 40%;
+  }
+}
+@media screen and (min-width: 426px) and (max-width: 768px) {
+  .no-match {
+    height: calc(100vh - pixelToRem(80));
+    background-position: 40px 40px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .no-match {
+    height: calc(100vh - pixelToRem(64));
+    background-position: 40px 40px;
+  }
+}
