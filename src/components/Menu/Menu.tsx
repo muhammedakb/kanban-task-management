@@ -1,7 +1,8 @@
 import { useRef, useState } from 'react';
 import classNames from 'classnames';
 
-import useOnClickOutside from '../../hooks/useOnClickOutside';
+import useOnClickOutside from 'hooks/useOnClickOutside';
+
 import Ellipsis from '../Icons/Ellipsis';
 
 import './menu.scss';

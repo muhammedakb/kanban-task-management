@@ -6,6 +6,7 @@ import './button.scss';
 
 type ButtonProps = {
   disabled?: boolean;
+  fullWidth?: boolean;
   loading?: boolean;
   onClick?: () => void;
   size?: 'xsmall' | 'small' | 'medium' | 'large';
@@ -16,6 +17,7 @@ type ButtonProps = {
 
 const Button = ({
   disabled = false,
+  fullWidth = false,
   loading,
   onClick,
   size = 'small',
@@ -24,7 +26,9 @@ const Button = ({
   variant = 'primary',
 }: ButtonProps) => (
   <button
-    className={classNames('btn center-flex', variant, size)}
+    className={classNames('btn center-flex', variant, size, {
+      fullwidth: fullWidth,
+    })}
     disabled={disabled}
     onClick={onClick}
     type={type}

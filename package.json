@@ -2,6 +2,10 @@
   "name": "kanban-task-management",
   "private": true,
   "version": "0.0.0",
+  "author": {
+    "name": "Muhammet Akbulut",
+    "email": "muhammetakb68@gmail.com"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -46,6 +50,7 @@
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "prettier": "^2.8.4",
     "typescript": "^4.9.3",
-    "vite": "^4.1.0"
+    "vite": "^4.1.0",
+    "vite-tsconfig-paths": "^4.0.7"
   }
 }

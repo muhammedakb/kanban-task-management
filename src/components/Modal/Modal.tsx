@@ -3,7 +3,8 @@ import classNames from 'classnames';
 import type { ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 
-import useOnClickOutside from '../../hooks/useOnClickOutside';
+import useOnClickOutside from 'hooks/useOnClickOutside';
+
 import Menu from '../Menu';
 import type { MenuProps } from '../Menu/Menu';
 

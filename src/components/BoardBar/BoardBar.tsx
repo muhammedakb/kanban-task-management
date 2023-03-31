@@ -1,7 +1,8 @@
 import type { FC } from 'react';
 import { createPortal } from 'react-dom';
 
-import { useNavbarVisibility } from '../../context/NavbarVisibilityProvider';
+import { useNavbarVisibility } from 'context/NavbarVisibilityProvider';
+
 import BoardBarItem from '../BoardBarItem';
 import ShowIcon from '../Icons/ShowIcon';
 import ThemeSelector from '../ThemeSelector';
@@ -12,15 +13,15 @@ import './boardBar.scss';
 
 export type BoardBarProps = {
   boardItems: Array<{ text: string; onClick?: () => void }>;
-  onCreate: () => void;
+  onCreateClick: () => void;
 };
 
-const BoardBar: FC<BoardBarProps> = ({ boardItems, onCreate }) => {
+const BoardBar: FC<BoardBarProps> = ({ boardItems, onCreateClick }) => {
   const { isMobileMenu, isOpened, setIsOpened } = useNavbarVisibility();
 
   if (isMobileMenu && isOpened) {
     return createPortal(
-      <MobileBoardBar boardItems={boardItems} onCreate={onCreate} />,
+      <MobileBoardBar boardItems={boardItems} onCreateClick={onCreateClick} />,
       document.body
     );
   }
@@ -42,7 +43,7 @@ const BoardBar: FC<BoardBarProps> = ({ boardItems, onCreate }) => {
           ))}
           <BoardBarItem
             isCreateButton
-            onClick={onCreate}
+            onClick={onCreateClick}
             text="+ Create New Board"
           />
         </main>

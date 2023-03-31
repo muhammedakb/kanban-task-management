@@ -1,10 +1,11 @@
 import { useMemo, useState } from 'react';
 import type { FC } from 'react';
 
-import BoardColumn from '../../components/BoardColumn';
-import BoardContainer from '../../components/BoardContainer';
-import Button from '../../components/Button';
-import type { ColumnData } from '../../types';
+import BoardColumn from 'components/BoardColumn';
+import BoardContainer from 'components/BoardContainer';
+import Button from 'components/Button';
+
+import type { ColumnData } from 'types';
 
 import ItemDetailModal from './ItemDetailModal';
 

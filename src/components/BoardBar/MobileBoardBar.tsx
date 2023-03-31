@@ -5,7 +5,7 @@ import ThemeSelector from '../ThemeSelector';
 
 import type { BoardBarProps } from './BoardBar';
 
-const MobileBoardBar: FC<BoardBarProps> = ({ boardItems, onCreate }) => (
+const MobileBoardBar: FC<BoardBarProps> = ({ boardItems, onCreateClick }) => (
   <div className="mobile-board-bar vertical-center">
     <div className="mobile-board-bar__menu">
       <main className="board-bar__items">
@@ -21,7 +21,7 @@ const MobileBoardBar: FC<BoardBarProps> = ({ boardItems, onCreate }) => (
         ))}
         <BoardBarItem
           isCreateButton
-          onClick={onCreate}
+          onClick={onCreateClick}
           text="+ Create New Board"
         />
       </main>

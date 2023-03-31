@@ -1,7 +1,8 @@
 import classNames from 'classnames';
 import type { FC } from 'react';
 
-import { useTheme } from '../../context/ThemeProvider';
+import { useTheme } from 'context/ThemeProvider';
+
 import Switch from '../Switch';
 
 import './themeSelector.scss';

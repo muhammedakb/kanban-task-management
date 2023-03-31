@@ -14,7 +14,7 @@ const Template: ComponentStory<typeof BoardBar> = () => (
       { text: 'Marketing Plan', onClick: () => {} },
       { text: 'Roadmap', onClick: () => {} },
     ]}
-    onCreate={() => {}}
+    onCreateClick={() => {}}
   />
 );
 

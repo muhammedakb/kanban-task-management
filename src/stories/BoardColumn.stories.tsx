@@ -75,7 +75,11 @@ const dummy = {
 };
 
 const Template: ComponentStory<typeof BoardColumn> = () => (
-  <BoardColumn columnData={dummy} onItemClick={(item) => console.log(item)} />
+  <BoardColumn
+    categoryTitleColor=""
+    columnData={dummy}
+    onItemClick={(item) => console.log(item)}
+  />
 );
 
 export const Column = Template.bind({});

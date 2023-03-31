@@ -12,7 +12,7 @@ type TextFieldProps = {
   placeholder?: string;
   textarea?: boolean;
   type?: 'text' | 'email' | 'password';
-  value: string;
+  value?: string;
 };
 
 const TextField = ({
