@@ -5,6 +5,7 @@
   width: 100%;
   max-width: pixelToRem(416);
   min-width: pixelToRem(295);
+  position: relative;
 
   &__label {
     display: inline-block;
@@ -46,6 +47,8 @@
     margin-top: 7px;
     border-radius: 8px;
     background-color: $white;
+    position: absolute;
+    width: 100%;
     &::-webkit-scrollbar-track {
       -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
       background-color: $light-grey;

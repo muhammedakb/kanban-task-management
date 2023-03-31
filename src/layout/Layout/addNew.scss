@@ -1,0 +1,26 @@
+@import '../../style/utils/variables';
+@import '../../style/utils/functions';
+
+.addnew-form {
+  row-gap: 1rem;
+
+  .addnew-arr {
+    row-gap: pixelToRem(12);
+    &__label {
+      color: $medium-grey;
+    }
+    &__inputs {
+      &__input {
+        width: 100%;
+        margin-right: 1rem;
+      }
+      button {
+        width: 1rem;
+        height: 1rem;
+        border: none;
+        background: none;
+        cursor: pointer;
+      }
+    }
+  }
+}

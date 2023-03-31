@@ -1,8 +1,10 @@
 import { memo, useCallback } from 'react';
 import type { FC } from 'react';
 
-import { useNavbarVisibility } from '../../context/NavbarVisibilityProvider';
-import useWindowSize from '../../hooks/useWindowSize';
+import { useNavbarVisibility } from 'context/NavbarVisibilityProvider';
+
+import useWindowSize from 'hooks/useWindowSize';
+
 import Button from '../Button';
 import AddIcon from '../Icons/AddIcon';
 import ChevronDown from '../Icons/ChevronDown';

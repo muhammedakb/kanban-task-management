@@ -16,6 +16,7 @@ const Template: ComponentStory<typeof BoardContainer> = () => (
       .columns.map((column) => (
         <BoardColumn
           key={column.name}
+          categoryTitleColor=""
           columnData={column}
           onItemClick={(item) => console.log('ITEM', item)}
         />

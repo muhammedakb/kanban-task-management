@@ -29,6 +29,9 @@
     border-radius: 24px;
     @extend .fw-700-m;
   }
+  &.fullwidth {
+    width: 100%;
+  }
   &.primary {
     background-color: $main-purple;
     &:hover {
