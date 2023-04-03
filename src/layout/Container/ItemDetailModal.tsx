@@ -1,8 +1,8 @@
-import Checkbox from 'components/Checkbox';
-import Modal from 'components/Modal';
-import Select from 'components/Select';
+import type { ColumnData } from 'types/types';
 
-import type { ColumnData } from 'types';
+import Checkbox from '@components/Checkbox';
+import Modal from '@components/Modal';
+import Select from '@components/Select';
 
 import './itemDetailModal.scss';
 

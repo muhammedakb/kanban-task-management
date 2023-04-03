@@ -1,9 +1,9 @@
 import { FieldArray } from 'formik';
 import type { ChangeEvent } from 'react';
 
-import Button from 'components/Button';
-import CloseIcon from 'components/Icons/CloseIcon';
-import TextField from 'components/TextField';
+import Button from '@components/Button';
+import CloseIcon from '@components/Icons/CloseIcon';
+import TextField from '@components/TextField';
 
 type Props = {
   handleChange: (e: ChangeEvent<any>) => void;

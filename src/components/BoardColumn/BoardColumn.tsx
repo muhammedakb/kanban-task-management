@@ -1,6 +1,5 @@
 import type { FC } from 'react';
-
-import type { ColumnData } from 'types';
+import type { ColumnData } from 'types/types';
 
 import BoardCategoryTitle from '../BoardCategoryTitle';
 import BoardItem from '../BoardItem';
