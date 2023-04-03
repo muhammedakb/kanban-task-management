@@ -8,7 +8,7 @@ import {
 } from 'react';
 import type { ReactNode } from 'react';
 
-import useWindowSize from 'hooks/useWindowSize';
+import useWindowSize from '@hooks/useWindowSize';
 
 type NavbarVisibilityProps = {
   children: ReactNode;

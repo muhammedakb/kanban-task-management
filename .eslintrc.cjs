@@ -23,18 +23,18 @@ module.exports = {
               ['^react$', '^next', '^[a-z]'],
               // Packages starting with `@`
               ['^@'],
-              // Packages starting with `components`
-              ['^components'],
-              // Packages starting with `context`
-              ['^context'],
-              // Packages starting with `hooks`
-              ['^hooks'],
-              // Packages starting with `layout`
-              ['^layout'],
-              // Packages starting with `types`
-              ['^types'],
-              // Packages starting with `utils`
-              ['^utils'],
+              // Packages starting with `@components`
+              ['^@components'],
+              // Packages starting with `@context`
+              ['^@context'],
+              // Packages starting with `@hooks`
+              ['^@hooks'],
+              // Packages starting with `@layout`
+              ['^@layout'],
+              // Packages starting with `@types`
+              ['^@types'],
+              // Packages starting with `@utils`
+              ['^@utils'],
               // Packages starting with `~`
               ['^~'],
               // Imports starting with `../`

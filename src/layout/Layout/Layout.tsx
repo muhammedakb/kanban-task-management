@@ -2,12 +2,12 @@ import { useMemo, useState } from 'react';
 import classNames from 'classnames';
 import { Outlet, useLocation } from 'react-router-dom';
 
-import BoardBar from 'components/BoardBar';
-import Header from 'components/Header';
+import BoardBar from '@components/BoardBar';
+import Header from '@components/Header';
 
-import { useNavbarVisibility } from 'context/NavbarVisibilityProvider';
+import { useNavbarVisibility } from '@context/NavbarVisibilityProvider';
 
-import { deslugify } from 'utils';
+import { deslugify } from '@utils/index';
 
 import data from '../../../data/data.json';
 

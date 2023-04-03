@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import type { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { slugify } from 'utils';
+import { slugify } from '@utils/index';
 
 import './boardBarItem.scss';
 

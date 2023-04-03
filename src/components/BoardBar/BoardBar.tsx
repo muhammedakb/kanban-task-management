@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { createPortal } from 'react-dom';
 
-import { useNavbarVisibility } from 'context/NavbarVisibilityProvider';
+import { useNavbarVisibility } from '@context/NavbarVisibilityProvider';
 
 import BoardBarItem from '../BoardBarItem';
 import ShowIcon from '../Icons/ShowIcon';

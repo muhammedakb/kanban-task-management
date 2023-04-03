@@ -1,11 +1,12 @@
 import { useMemo, useState } from 'react';
 import type { FC } from 'react';
+import type { ColumnData } from 'types/types';
 
-import BoardColumn from 'components/BoardColumn';
-import BoardContainer from 'components/BoardContainer';
-import Button from 'components/Button';
+import BoardColumn from '@components/BoardColumn';
+import BoardContainer from '@components/BoardContainer';
+import Button from '@components/Button';
 
-import type { ColumnData } from 'types';
+import NewColumn from '../Layout/newColumn';
 
 import ItemDetailModal from './ItemDetailModal';
 
@@ -15,6 +16,7 @@ type ContainerProps = {
 
 const Container: FC<ContainerProps> = ({ columns }) => {
   const [istheModalOpen, toggleModal] = useState(false);
+  const [istheNewColumnModalOpen, toggleNewColumnModal] = useState(false);
   const [openedItem, setOpenedItem] = useState<ColumnData['tasks'][0]>();
 
   const completedSubTasks = useMemo(
@@ -37,6 +39,14 @@ const Container: FC<ContainerProps> = ({ columns }) => {
     setOpenedItem(undefined);
   };
 
+  const onNewColumnClick = () => {
+    toggleNewColumnModal(true);
+  };
+
+  const closeNewColumnModal = () => {
+    toggleNewColumnModal(false);
+  };
+
   const handleColor = (index: number): string => {
     switch (index) {
       case 0:
@@ -57,7 +67,11 @@ const Container: FC<ContainerProps> = ({ columns }) => {
           <p className="fw-700-lg">
             This board is empty. Create a new column to get started.
           </p>
-          <Button size="medium" text="+ Add New Column" />
+          <Button
+            onClick={onNewColumnClick}
+            size="medium"
+            text="+ Add New Column"
+          />
         </div>
       ) : (
         <>
@@ -69,7 +83,12 @@ const Container: FC<ContainerProps> = ({ columns }) => {
               onItemClick={onItemClick}
             />
           ))}
-          <section className="container__new-column fw-700-xl center-flex">
+          {/* eslint-disable-next-line jsx-a11y/interactive-supports-focus */}
+          <section
+            className="container__new-column fw-700-xl center-flex"
+            onClick={onNewColumnClick}
+            role="button"
+          >
             + New Column
           </section>
           <ItemDetailModal
@@ -81,6 +100,10 @@ const Container: FC<ContainerProps> = ({ columns }) => {
           />
         </>
       )}
+      <NewColumn
+        closeModal={closeNewColumnModal}
+        istheModalOpen={istheNewColumnModalOpen}
+      />
     </BoardContainer>
   );
 };

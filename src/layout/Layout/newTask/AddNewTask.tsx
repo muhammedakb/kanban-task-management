@@ -2,10 +2,10 @@ import { Form, Formik } from 'formik';
 import type { FC } from 'react';
 import * as Yup from 'yup';
 
-import Button from 'components/Button';
-import Modal from 'components/Modal';
-import Select from 'components/Select';
-import TextField from 'components/TextField';
+import Button from '@components/Button';
+import Modal from '@components/Modal';
+import Select from '@components/Select';
+import TextField from '@components/TextField';
 
 import AddNewSubTask from './AddNewSubTask';
 
