@@ -26,14 +26,20 @@ const Menu = ({ menuItems }: MenuProps) => {
     (event) => (event.target as Record<string, any>)?.id !== 'ellipsisBtn'
   );
 
-  const onClick = () => setIsOpened((prevState) => !prevState);
+  const onEllipsisClick = () => setIsOpened((prevState) => !prevState);
+
+  const onItemClick = (fn: () => void) => {
+    fn();
+    setIsOpened(false);
+  };
+
   return (
     <>
       <button
         ref={ellipsisRef}
         className="ellipsis"
         id="ellipsisBtn"
-        onClick={onClick}
+        onClick={onEllipsisClick}
         type="button"
       >
         <Ellipsis />
@@ -48,7 +54,7 @@ const Menu = ({ menuItems }: MenuProps) => {
                 'ellipsis__menu__item fw-500-md horizontal-center',
                 item.variant
               )}
-              onClick={item.onClick}
+              onClick={() => onItemClick(item.onClick)}
               type="button"
             >
               {item.text}

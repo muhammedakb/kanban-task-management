@@ -4,38 +4,38 @@ import Checkbox from '@components/Checkbox';
 import Modal from '@components/Modal';
 import Select from '@components/Select';
 
-import './itemDetailModal.scss';
+import './itemDetail.scss';
 
-type ItemDetailModalProps = {
+type ItemDetailProps = {
   closeModal: () => void;
   completedSubTasks: number;
+  istheModalOpen: boolean;
+  onDelete?: () => void;
+  onEdit?: () => void;
   openedItem?: ColumnData['tasks'][0];
   options: Array<{ value: string; text: string }>;
-  istheModalOpen: boolean;
 };
 
-const ItemDetailModal = ({
+const ItemDetail = ({
   closeModal,
   completedSubTasks,
+  istheModalOpen,
+  onDelete,
+  onEdit,
   openedItem,
   options,
-  istheModalOpen,
-}: ItemDetailModalProps) => (
+}: ItemDetailProps) => (
   <Modal
     menuItems={[
       {
         text: 'Edit Task',
         variant: 'primary',
-        onClick() {
-          console.log('clicked');
-        },
+        onClick: () => onEdit?.(),
       },
       {
         text: 'Delete Task',
         variant: 'danger',
-        onClick() {
-          console.log('clicked');
-        },
+        onClick: () => onDelete?.(),
       },
     ]}
     title={{ text: openedItem?.title ?? '' }}
@@ -65,10 +65,10 @@ const ItemDetailModal = ({
     <Select
       defaultValue={openedItem?.status}
       label="Current Status"
-      onSelect={(value) => console.log('zort', value)}
+      onSelect={(value) => console.log(value)}
       options={options}
     />
   </Modal>
 );
 
-export default ItemDetailModal;
+export default ItemDetail;

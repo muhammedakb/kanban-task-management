@@ -1,22 +1,23 @@
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useReducer, useState } from 'react';
 import type { FC } from 'react';
 import type { ColumnData } from 'types/types';
 
 import BoardColumn from '@components/BoardColumn';
 import BoardContainer from '@components/BoardContainer';
 import Button from '@components/Button';
+import DeleteModal from '@components/DeleteModal/DeleteModal';
+import AddNewColumn from '@components/Modals/AddNewColumn';
+import EditTask from '@components/Modals/AddNewTask';
+import ItemDetail from '@components/Modals/ItemDetail';
 
-import NewColumn from '../Layout/newColumn';
-
-import ItemDetailModal from './ItemDetailModal';
+import { modalInitialState, modalReducer, Toggles } from './reducer';
 
 type ContainerProps = {
   columns: ColumnData[];
 };
 
 const Container: FC<ContainerProps> = ({ columns }) => {
-  const [istheModalOpen, toggleModal] = useState(false);
-  const [istheNewColumnModalOpen, toggleNewColumnModal] = useState(false);
+  const [state, dispatch] = useReducer(modalReducer, modalInitialState);
   const [openedItem, setOpenedItem] = useState<ColumnData['tasks'][0]>();
 
   const completedSubTasks = useMemo(
@@ -29,22 +30,27 @@ const Container: FC<ContainerProps> = ({ columns }) => {
     text: column.name,
   }));
 
+  const toggleItemDetail = () => {
+    dispatch({ type: Toggles.ITEM_DETAIL });
+  };
+
+  const toggleAddNewColumn = () => {
+    dispatch({ type: Toggles.ADD_NEW_COLUMN });
+  };
+
+  const toggleTask = useCallback(
+    (type: 'edit' | 'delete') => {
+      if (state.isItemDetailModalOn) toggleItemDetail();
+      dispatch({
+        type: type === 'edit' ? Toggles.EDIT_TASK : Toggles.DELETE_TASK,
+      });
+    },
+    [state.isItemDetailModalOn]
+  );
+
   const onItemClick = (item: ColumnData['tasks'][0]) => {
     setOpenedItem(item);
-    toggleModal(true);
-  };
-
-  const closeModal = () => {
-    toggleModal(false);
-    setOpenedItem(undefined);
-  };
-
-  const onNewColumnClick = () => {
-    toggleNewColumnModal(true);
-  };
-
-  const closeNewColumnModal = () => {
-    toggleNewColumnModal(false);
+    toggleItemDetail();
   };
 
   const handleColor = (index: number): string => {
@@ -68,7 +74,7 @@ const Container: FC<ContainerProps> = ({ columns }) => {
             This board is empty. Create a new column to get started.
           </p>
           <Button
-            onClick={onNewColumnClick}
+            onClick={toggleAddNewColumn}
             size="medium"
             text="+ Add New Column"
           />
@@ -86,23 +92,47 @@ const Container: FC<ContainerProps> = ({ columns }) => {
           {/* eslint-disable-next-line jsx-a11y/interactive-supports-focus */}
           <section
             className="container__new-column fw-700-xl center-flex"
-            onClick={onNewColumnClick}
+            onClick={toggleAddNewColumn}
             role="button"
           >
             + New Column
           </section>
-          <ItemDetailModal
-            closeModal={closeModal}
+          <ItemDetail
+            closeModal={toggleItemDetail}
             completedSubTasks={completedSubTasks ?? 0}
-            istheModalOpen={istheModalOpen}
+            istheModalOpen={state.isItemDetailModalOn}
+            onDelete={() => toggleTask('delete')}
+            onEdit={() => toggleTask('edit')}
             openedItem={openedItem}
             options={options}
           />
+          <EditTask
+            editMode
+            closeModal={() => toggleTask('edit')}
+            istheModalOpen={state.isEditTaskModalOn}
+            taskValues={{
+              status: openedItem?.status ?? '',
+              title: openedItem?.title ?? '',
+              description: openedItem?.description ?? '',
+              subtasks: openedItem?.subtasks?.map(
+                (subtask) => subtask.title
+              ) ?? [''],
+            }}
+          />
+          <DeleteModal
+            closeModal={() => toggleTask('delete')}
+            istheModalOpen={state.isDeleteTaskModalOn}
+            onDelete={() => {
+              alert(`${openedItem?.title} - deleted`);
+            }}
+            taskName={openedItem?.title ?? ''}
+            type="task"
+          />
         </>
       )}
-      <NewColumn
-        closeModal={closeNewColumnModal}
-        istheModalOpen={istheNewColumnModalOpen}
+      <AddNewColumn
+        closeModal={toggleAddNewColumn}
+        istheModalOpen={state.isAddNewColumnModalOn}
       />
     </BoardContainer>
   );

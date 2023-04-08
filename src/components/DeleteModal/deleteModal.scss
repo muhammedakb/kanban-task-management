@@ -1,0 +1,23 @@
+@import '../../style/utils/variables';
+
+.modal__content {
+  p[class='fw-500-md'] {
+    color: $medium-grey;
+  }
+
+  footer {
+    margin-top: 1.5rem;
+    gap: 1rem;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .modal__content {
+    footer {
+      flex-wrap: wrap;
+      & > button {
+        width: 100%;
+      }
+    }
+  }
+}
