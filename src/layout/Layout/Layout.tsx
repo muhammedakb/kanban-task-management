@@ -1,9 +1,13 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useReducer } from 'react';
 import classNames from 'classnames';
 import { Outlet, useLocation } from 'react-router-dom';
 
 import BoardBar from '@components/BoardBar';
+import DeleteModal from '@components/DeleteModal/DeleteModal';
 import Header from '@components/Header';
+import AddNewBoard from '@components/Modals/AddNewBoard';
+import AddNewTask from '@components/Modals/AddNewTask';
+import EditBoard from '@components/Modals/EditBoard';
 
 import { useNavbarVisibility } from '@context/NavbarVisibilityProvider';
 
@@ -11,32 +15,30 @@ import { deslugify } from '@utils/index';
 
 import data from '../../../data/data.json';
 
-import AddNewBoard from './newBoard/AddNewBoard';
-import AddNewTask from './newTask/AddNewTask';
+import { modalInitialState, modalReducer, Toggles } from './reducer';
 
-import './addNew.scss';
+import '@components/Modals/addNew.scss';
 
 const Layout = () => {
   const { pathname } = useLocation();
   const { isOpened, isMobileMenu } = useNavbarVisibility();
 
-  const [addNewTaskModalStatus, addNewTaskSetModalStatus] = useState(false);
-  const [addNewBoardModalStatus, addNewBoardSetModalStatus] = useState(false);
+  const [state, dispatch] = useReducer(modalReducer, modalInitialState);
 
-  const openAddNewBoard = () => {
-    addNewBoardSetModalStatus(true);
+  const toggleAddNewBoard = () => {
+    dispatch({ type: Toggles.ADD_NEW_BOARD });
   };
 
-  const closeAddNewBoard = () => {
-    addNewBoardSetModalStatus(false);
+  const toggleAddNewTask = () => {
+    dispatch({ type: Toggles.ADD_NEW_TASK });
   };
 
-  const openAddNewTask = () => {
-    addNewTaskSetModalStatus(true);
+  const toggleDeleteBoard = () => {
+    dispatch({ type: Toggles.DELETE_BOARD });
   };
 
-  const closeAddNewTask = () => {
-    addNewTaskSetModalStatus(false);
+  const toggleEditBoard = () => {
+    dispatch({ type: Toggles.EDIT_BOARD });
   };
 
   const boardItems = useMemo(
@@ -46,9 +48,17 @@ const Layout = () => {
 
   const title = useMemo(() => deslugify(pathname.replace('/', '')), [pathname]);
 
+  const boardColumns = useMemo(
+    () =>
+      data.boards
+        ?.filter((board) => board.name === title)?.[0]
+        ?.columns?.map((column) => column.name),
+    [title]
+  );
+
   return (
     <>
-      <BoardBar boardItems={boardItems} onCreateClick={openAddNewBoard} />
+      <BoardBar boardItems={boardItems} onCreateClick={toggleAddNewBoard} />
       <main
         className={classNames('main', {
           isOpened: isOpened && !isMobileMenu,
@@ -59,29 +69,40 @@ const Layout = () => {
             {
               text: 'Edit Board',
               variant: 'primary',
-              onClick: () => {
-                console.log('clicked');
-              },
+              onClick: toggleEditBoard,
             },
             {
               text: 'Delete Board',
               variant: 'danger',
-              onClick: () => {
-                console.log('clicked');
-              },
+              onClick: toggleDeleteBoard,
             },
           ]}
-          onAddNewTaskClick={openAddNewTask}
+          onAddNewTaskClick={toggleAddNewTask}
           title={title}
         />
         <Outlet />
         <AddNewBoard
-          closeModal={closeAddNewBoard}
-          istheModalOpen={addNewBoardModalStatus}
+          closeModal={toggleAddNewBoard}
+          istheModalOpen={state.isAddNewBoardModalOn}
         />
         <AddNewTask
-          closeModal={closeAddNewTask}
-          istheModalOpen={addNewTaskModalStatus}
+          closeModal={toggleAddNewTask}
+          istheModalOpen={state.isAddNewTaskModalOn}
+        />
+        <EditBoard
+          boardName={title}
+          closeModal={toggleEditBoard}
+          columns={boardColumns}
+          istheModalOpen={state.isEditBoardModalOn}
+        />
+        <DeleteModal
+          boardName={title}
+          closeModal={toggleDeleteBoard}
+          istheModalOpen={state.isDeleteBoardModalOn}
+          onDelete={() => {
+            alert(`${title} - deleted`);
+          }}
+          type="board"
         />
       </main>
     </>

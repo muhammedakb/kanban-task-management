@@ -56,7 +56,6 @@
   align-items: flex-start;
   &__menu {
     width: pixelToRem(264);
-    height: pixelToRem(322);
     padding-top: 1rem;
     position: relative;
     background-color: $white;
@@ -85,6 +84,8 @@
       }
     }
     &__footer {
+      position: relative;
+      margin-top: 1rem;
       bottom: 0.5rem;
     }
   }

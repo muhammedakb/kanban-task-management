@@ -9,28 +9,48 @@ import TextField from '@components/TextField';
 
 import AddNewSubTask from './AddNewSubTask';
 
-type AddNewTaskProps = {
-  closeModal: () => void;
-  istheModalOpen: boolean;
-};
+type AddNewTaskProps =
+  | {
+      closeModal: () => void;
+      istheModalOpen: boolean;
+    } & (
+      | {
+          editMode?: true;
+          taskValues: {
+            title: string;
+            description?: string;
+            subtasks?: Array<string>;
+            status: string;
+          };
+        }
+      | {
+          editMode?: false;
+          taskValues?: never;
+        }
+    );
 
 const validationSchema = Yup.object({
   title: Yup.string().required("title can't be empty"),
   description: Yup.string().min(10, 'Must be more than 10'),
 });
 
-const AddNewTask: FC<AddNewTaskProps> = ({ closeModal, istheModalOpen }) => (
+const AddNewTask: FC<AddNewTaskProps> = ({
+  closeModal,
+  istheModalOpen,
+  editMode,
+  taskValues,
+}) => (
   <Modal
-    title={{ text: 'Add New Task' }}
+    title={{ text: editMode ? 'Edit Task' : 'Add New Task' }}
     toggle={closeModal}
     visible={istheModalOpen}
   >
     <Formik
       initialValues={{
-        title: '',
-        description: '',
-        subtasks: ['', ''],
-        status: 'todo',
+        title: taskValues?.title ?? '',
+        description: taskValues?.description ?? '',
+        subtasks: taskValues?.subtasks ?? ['', ''],
+        status: taskValues?.status?.toLowerCase() ?? 'todo',
       }}
       onSubmit={(values) => console.log(values)}
       validationSchema={validationSchema}
@@ -63,13 +83,18 @@ const AddNewTask: FC<AddNewTaskProps> = ({ closeModal, istheModalOpen }) => (
             defaultValue={values.status}
             label="Status"
             onSelect={(value) => setFieldValue('status', value)}
+            // TODO: set options from active(selected) board
             options={[
               { text: 'Todo', value: 'todo' },
               { text: 'Doing', value: 'doing' },
               { text: 'Done', value: 'done' },
             ]}
           />
-          <Button fullWidth text="Create Task" type="submit" />
+          <Button
+            fullWidth
+            text={editMode ? 'Save Changes' : 'Create Task'}
+            type="submit"
+          />
         </Form>
       )}
     </Formik>
