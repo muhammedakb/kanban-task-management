@@ -1,11 +1,7 @@
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useMemo,
-  useState,
-} from 'react';
+import { createContext, useCallback, useContext, useMemo } from 'react';
 import type { ReactNode } from 'react';
+
+import useLocalStorage from '@hooks/useLocalStorage';
 
 type ThemeContextProps = {
   children: ReactNode;
@@ -24,11 +20,11 @@ const ThemeContext = createContext<ThemeContextType>({
 });
 
 const ThemeProvider = ({ children }: ThemeContextProps) => {
-  const [theme, setTheme] = useState<Theme>('light');
+  const [theme, setTheme] = useLocalStorage<Theme>('theme', 'light');
 
   const toggleTheme = useCallback(() => {
-    setTheme((prevTheme) => (prevTheme === 'dark' ? 'light' : 'dark'));
-  }, []);
+    setTheme(theme === 'dark' ? 'light' : 'dark');
+  }, [setTheme, theme]);
 
   const value = useMemo(() => ({ theme, toggleTheme }), [theme, toggleTheme]);
 
