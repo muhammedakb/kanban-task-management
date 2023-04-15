@@ -3,6 +3,8 @@ import classNames from 'classnames';
 import type { ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 
+import { useTheme } from '@context/ThemeProvider';
+
 import useOnClickOutside from '@hooks/useOnClickOutside';
 
 import Menu from '../Menu';
@@ -23,6 +25,7 @@ type ModalProps = {
 
 const Modal = ({ children, menuItems, toggle, title, visible }: ModalProps) => {
   const modalRef = useRef(null);
+  const { theme } = useTheme();
 
   useOnClickOutside(
     modalRef,
@@ -33,7 +36,7 @@ const Modal = ({ children, menuItems, toggle, title, visible }: ModalProps) => {
   return visible
     ? createPortal(
         <div className="modal__backdrop center-flex" id="root_modal">
-          <main ref={modalRef} className="modal__content">
+          <main ref={modalRef} className={`modal__content ${theme}`}>
             <header className="modal__content__header space-between">
               {title ? (
                 <p

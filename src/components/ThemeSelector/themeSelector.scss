@@ -54,6 +54,9 @@
       }
     }
   }
+  &.dark {
+    background-color: $very-dark-grey;
+  }
 }
 
 @media screen and (max-width: 768px) {

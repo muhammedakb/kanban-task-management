@@ -3,10 +3,10 @@ import classNames from 'classnames';
 import { Outlet, useLocation } from 'react-router-dom';
 
 import BoardBar from '@components/BoardBar';
-import DeleteModal from '@components/DeleteModal/DeleteModal';
 import Header from '@components/Header';
 import AddNewBoard from '@components/Modals/AddNewBoard';
 import AddNewTask from '@components/Modals/AddNewTask';
+import DeleteModal from '@components/Modals/DeleteModal';
 import EditBoard from '@components/Modals/EditBoard';
 
 import { useNavbarVisibility } from '@context/NavbarVisibilityProvider';

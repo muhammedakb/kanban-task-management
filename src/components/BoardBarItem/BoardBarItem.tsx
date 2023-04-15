@@ -3,6 +3,8 @@ import classNames from 'classnames';
 import type { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 
+import { useTheme } from '@context/ThemeProvider';
+
 import { slugify } from '@utils/index';
 
 import './boardBarItem.scss';
@@ -19,12 +21,14 @@ const BoardBarItem: FC<BoardBarItemProps> = ({
   onClick,
   text,
   type = 'navbarItem',
-}) =>
-  type === 'navbarItem' && !isCreateButton ? (
+}) => {
+  const { theme } = useTheme();
+
+  return type === 'navbarItem' && !isCreateButton ? (
     <NavLink
       className={({ isActive }) =>
         classNames('bar__item horizontal-center', {
-          createBtn: isCreateButton,
+          dark: theme === 'dark',
           active: isActive,
         })
       }
@@ -38,7 +42,9 @@ const BoardBarItem: FC<BoardBarItemProps> = ({
     <button
       className={classNames('bar__item horizontal-center', {
         createBtn: isCreateButton,
+        createBtn__dark: isCreateButton && theme === 'dark',
         hideSidebar: !isCreateButton,
+        hideSidebar__dark: !isCreateButton && theme === 'dark',
       })}
       onClick={() => onClick?.()}
     >
@@ -46,5 +52,6 @@ const BoardBarItem: FC<BoardBarItemProps> = ({
       <span className="bar__item__text fw-700-m">{text}</span>
     </button>
   );
+};
 
 export default memo(BoardBarItem);

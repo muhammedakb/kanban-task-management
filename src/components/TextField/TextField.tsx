@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react';
 import classNames from 'classnames';
 
+import { useTheme } from '@context/ThemeProvider';
+
 import './textField.scss';
 
 type TextFieldProps = {
@@ -28,6 +30,7 @@ const TextField = ({
 }: TextFieldProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const { theme } = useTheme();
 
   useEffect(() => {
     if (autoFocus) {
@@ -37,7 +40,7 @@ const TextField = ({
   }, [autoFocus, textarea]);
 
   return (
-    <div className="textfield horizontal-center fw-500-md">
+    <div className={`textfield horizontal-center fw-500-md ${theme}`}>
       <label className="textfield__label">
         <span className="fw-700-xs">{label}</span>
         {textarea ? (

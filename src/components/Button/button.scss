@@ -55,4 +55,9 @@
     opacity: 0.45;
     cursor: not-allowed;
   }
+  &.dark {
+    &.secondary {
+      background-color: $white;
+    }
+  }
 }

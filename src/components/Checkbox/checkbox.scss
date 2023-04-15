@@ -24,4 +24,17 @@
       color: rgba(0, 1, 18, 0.5);
     }
   }
+  &.dark {
+    background-color: $very-dark-grey;
+    &:hover {
+      background-color: rgba(99, 95, 199, 0.25);
+      mix-blend-mode: normal;
+    }
+    .checkbox__text {
+      color: $white;
+      &.checked {
+        color: rgba(255, 255, 255, 0.5);
+      }
+    }
+  }
 }

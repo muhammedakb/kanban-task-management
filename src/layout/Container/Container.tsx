@@ -5,9 +5,9 @@ import type { ColumnData } from 'types/types';
 import BoardColumn from '@components/BoardColumn';
 import BoardContainer from '@components/BoardContainer';
 import Button from '@components/Button';
-import DeleteModal from '@components/DeleteModal/DeleteModal';
 import AddNewColumn from '@components/Modals/AddNewColumn';
 import EditTask from '@components/Modals/AddNewTask';
+import DeleteModal from '@components/Modals/DeleteModal';
 import ItemDetail from '@components/Modals/ItemDetail';
 
 import { modalInitialState, modalReducer, Toggles } from './reducer';

@@ -47,6 +47,17 @@
       text-align: center;
     }
   }
+
+  &.dark {
+    background-color: $very-dark-grey;
+    .container__new-column {
+      background: linear-gradient(
+        180deg,
+        rgba(43, 44, 55, 0.25) 0%,
+        rgba(43, 44, 55, 0.125) 100%
+      );
+    }
+  }
 }
 
 @media screen and (min-width: 426px) and (max-width: 768px) {

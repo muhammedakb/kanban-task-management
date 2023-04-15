@@ -21,4 +21,16 @@
     color: $medium-grey;
     margin-top: 8px;
   }
+
+  &.dark {
+    background-color: $dark-grey;
+    & > p:first-child {
+      color: $white;
+    }
+    &:hover {
+      & > p:first-child {
+        color: $main-purple;
+      }
+    }
+  }
 }

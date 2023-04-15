@@ -57,5 +57,18 @@
         color: $red;
       }
     }
+    &.dark {
+      &.ellipsis__menu {
+        background-color: $very-dark-grey;
+      }
+      .ellipsis__menu {
+        &__item {
+          background-color: $very-dark-grey;
+          &:hover {
+            background-color: $dark-grey;
+          }
+        }
+      }
+    }
   }
 }

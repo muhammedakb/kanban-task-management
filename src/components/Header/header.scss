@@ -26,6 +26,21 @@
     margin-left: auto;
     column-gap: pixelToRem(24);
   }
+  &.dark {
+    background-color: $dark-grey;
+    &.header {
+      border-bottom-color: $lines-dark !important;
+    }
+    .header {
+      &__logo {
+        background: no-repeat center url('../../assets/logo-light.svg');
+        border-right-color: $lines-dark;
+      }
+      &__title {
+        color: $white;
+      }
+    }
+  }
 }
 
 @media screen and (min-width: 426px) and (max-width: 768px) {
@@ -41,6 +56,13 @@
       font-size: 20px;
       font-weight: 700;
       line-height: 25px;
+    }
+    &.dark {
+      .header {
+        &__logo {
+          background: no-repeat center url('../../assets/logo-mobile.svg');
+        }
+      }
     }
   }
 }
@@ -63,6 +85,13 @@
     }
     &__process {
       column-gap: 1rem;
+    }
+    &.dark {
+      .header {
+        &__logo {
+          background: no-repeat center url('../../assets/logo-mobile.svg');
+        }
+      }
     }
   }
 }
