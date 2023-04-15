@@ -1,5 +1,7 @@
 import classNames from 'classnames';
 
+import { useTheme } from '@context/ThemeProvider';
+
 import Spinner from '../Spinner';
 
 import './button.scss';
@@ -24,17 +26,21 @@ const Button = ({
   text,
   type = 'button',
   variant = 'primary',
-}: ButtonProps) => (
-  <button
-    className={classNames('btn center-flex', variant, size, {
-      fullwidth: fullWidth,
-    })}
-    disabled={disabled}
-    onClick={onClick}
-    type={type}
-  >
-    {loading ? <Spinner /> : <span>{text}</span>}
-  </button>
-);
+}: ButtonProps) => {
+  const { theme } = useTheme();
+  return (
+    <button
+      className={classNames('btn center-flex', variant, size, {
+        fullwidth: fullWidth,
+        dark: theme === 'dark',
+      })}
+      disabled={disabled}
+      onClick={onClick}
+      type={type}
+    >
+      {loading ? <Spinner /> : <span>{text}</span>}
+    </button>
+  );
+};
 
 export default Button;

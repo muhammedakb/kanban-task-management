@@ -10,7 +10,7 @@ import './themeSelector.scss';
 const ThemeSelector: FC = () => {
   const { theme, toggleTheme } = useTheme();
   return (
-    <div className="theme-selector space-between">
+    <div className={`theme-selector space-between ${theme}`}>
       <span
         className={classNames('theme-selector__light-icon', {
           active: theme === 'light',

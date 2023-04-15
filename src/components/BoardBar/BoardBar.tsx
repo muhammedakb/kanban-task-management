@@ -2,6 +2,7 @@ import type { FC } from 'react';
 import { createPortal } from 'react-dom';
 
 import { useNavbarVisibility } from '@context/NavbarVisibilityProvider';
+import { useTheme } from '@context/ThemeProvider';
 
 import BoardBarItem from '../BoardBarItem';
 import ShowIcon from '../Icons/ShowIcon';
@@ -18,6 +19,7 @@ export type BoardBarProps = {
 
 const BoardBar: FC<BoardBarProps> = ({ boardItems, onCreateClick }) => {
   const { isMobileMenu, isOpened, setIsOpened } = useNavbarVisibility();
+  const { theme } = useTheme();
 
   if (isMobileMenu && isOpened) {
     return createPortal(
@@ -28,7 +30,7 @@ const BoardBar: FC<BoardBarProps> = ({ boardItems, onCreateClick }) => {
 
   if (!isMobileMenu) {
     return isOpened ? (
-      <section className="board-bar">
+      <section className={`board-bar ${theme}`}>
         <header className="board-bar__logo" />
         <main className="board-bar__items">
           <p className="board-bar__items__title fw-700-xs">

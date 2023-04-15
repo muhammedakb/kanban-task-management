@@ -2,6 +2,7 @@ import { memo, useCallback } from 'react';
 import type { FC } from 'react';
 
 import { useNavbarVisibility } from '@context/NavbarVisibilityProvider';
+import { useTheme } from '@context/ThemeProvider';
 
 import useWindowSize from '@hooks/useWindowSize';
 
@@ -23,13 +24,14 @@ type HeaderProps = {
 const Header: FC<HeaderProps> = ({ menuItems, onAddNewTaskClick, title }) => {
   const { width } = useWindowSize();
   const { isOpened, setIsOpened } = useNavbarVisibility();
+  const { theme } = useTheme();
 
   const toggleMobileBar = useCallback(() => {
     if (width < 570) setIsOpened();
   }, [width, setIsOpened]);
 
   return (
-    <header className="header horizontal-center">
+    <header className={`header horizontal-center ${theme}`}>
       {(!isOpened || width < 570) && <div className="header__logo" />}
       <div
         className="header__title horizontal-center"

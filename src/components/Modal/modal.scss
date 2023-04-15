@@ -39,6 +39,12 @@
         right: 0;
       }
     }
+    &.dark {
+      background-color: $dark-grey;
+      .modal__content__header__title {
+        color: $white;
+      }
+    }
   }
 }
 

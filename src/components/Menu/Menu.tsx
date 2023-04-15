@@ -1,6 +1,8 @@
 import { useRef, useState } from 'react';
 import classNames from 'classnames';
 
+import { useTheme } from '@context/ThemeProvider';
+
 import useOnClickOutside from '@hooks/useOnClickOutside';
 
 import Ellipsis from '../Icons/Ellipsis';
@@ -18,6 +20,8 @@ export type MenuProps = {
 const Menu = ({ menuItems }: MenuProps) => {
   const ellipsisRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef(null);
+  const { theme } = useTheme();
+
   const [isOpened, setIsOpened] = useState(false);
 
   useOnClickOutside(
@@ -45,7 +49,7 @@ const Menu = ({ menuItems }: MenuProps) => {
         <Ellipsis />
       </button>
       {isOpened && (
-        <div ref={menuRef} className="ellipsis__menu">
+        <div ref={menuRef} className={`ellipsis__menu ${theme}`}>
           {menuItems.map((item, key) => (
             <button
               // eslint-disable-next-line react/no-array-index-key

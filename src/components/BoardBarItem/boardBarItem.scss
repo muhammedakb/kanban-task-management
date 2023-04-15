@@ -4,16 +4,22 @@
 .bar__item {
   width: pixelToRem(276);
   height: pixelToRem(48);
-  background-color: $white;
   color: $medium-grey;
   border: none;
   border-radius: 0px 100px 100px 0px;
   cursor: pointer;
   text-decoration: none;
   &.createBtn {
+    background-color: $white;
     color: $main-purple;
     .bar__item__icon {
       background: url('../../assets/icon-board-active.svg');
+    }
+    &__dark {
+      background-color: $dark-grey;
+      &:hover {
+        background-color: $white !important;
+      }
     }
   }
   &.active {
@@ -42,12 +48,33 @@
     margin-bottom: 3px;
   }
   &.hideSidebar {
+    background-color: $white;
+
     .bar__item__icon {
       width: pixelToRem(18);
       background: url('../../assets/icon-hide-sidebar.svg');
     }
     &:hover .bar__item__icon {
       background: url('../../assets/icon-hide-sidebar-hover.svg');
+    }
+
+    &__dark {
+      background-color: $dark-grey;
+      &:hover {
+        background-color: $white;
+      }
+    }
+  }
+  &.dark {
+    background-color: $dark-grey;
+    &.active {
+      background-color: $main-purple;
+    }
+    &:not(.active):hover {
+      background-color: $white;
+    }
+    &.hideSidebar {
+      background-color: $dark-grey;
     }
   }
 }

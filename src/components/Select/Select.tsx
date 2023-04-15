@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import type { FC } from 'react';
 
+import { useTheme } from '@context/ThemeProvider';
+
 import './select.scss';
 
 type SelectProps = {
@@ -17,6 +19,8 @@ const Select: FC<SelectProps> = ({
   options,
   defaultValue,
 }) => {
+  const { theme } = useTheme();
+
   const [selectedText, setSelectedText] = useState(defaultValue ?? '');
   const [isOpened, setIsOpened] = useState(false);
 
@@ -39,7 +43,7 @@ const Select: FC<SelectProps> = ({
   };
 
   return (
-    <div className="select">
+    <div className={`select ${theme}`}>
       {Boolean(label) && (
         <span className="select__label fw-700-xs">{label}</span>
       )}

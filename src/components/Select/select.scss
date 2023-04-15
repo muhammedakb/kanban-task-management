@@ -82,4 +82,24 @@
       }
     }
   }
+
+  &.dark {
+    .select {
+      &__label {
+        color: $white;
+      }
+      &__input__text {
+        color: $white;
+      }
+      &__options {
+        background-color: $very-dark-grey;
+        &__list__item__btn {
+          background-color: $very-dark-grey;
+          &:hover {
+            background-color: $dark-grey;
+          }
+        }
+      }
+    }
+  }
 }

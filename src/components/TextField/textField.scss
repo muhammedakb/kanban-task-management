@@ -23,7 +23,7 @@
     outline: none;
     &::placeholder {
       mix-blend-mode: normal;
-      opacity: 0.35;
+      opacity: 0.5;
     }
     &:hover {
       border-color: $main-purple;
@@ -47,5 +47,17 @@
     color: $red;
     right: 1rem;
     bottom: 9px;
+  }
+  &.dark {
+    .textfield {
+      &__label span {
+        color: $white;
+      }
+      &__input,
+      &__textarea {
+        background-color: $dark-grey;
+        color: $white;
+      }
+    }
   }
 }

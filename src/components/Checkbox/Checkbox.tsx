@@ -1,5 +1,7 @@
 import classNames from 'classnames';
 
+import { useTheme } from '@context/ThemeProvider';
+
 import './checkbox.scss';
 
 type CheckboxProps = {
@@ -8,17 +10,20 @@ type CheckboxProps = {
   text: string;
 };
 
-const Checkbox = ({ checked, onChange, text }: CheckboxProps) => (
-  <div className="checkbox horizontal-center">
-    <input checked={checked} onChange={onChange} type="checkbox" />
-    <p
-      className={classNames('checkbox__text fw-700-xs', {
-        checked,
-      })}
-    >
-      {text}
-    </p>
-  </div>
-);
+const Checkbox = ({ checked, onChange, text }: CheckboxProps) => {
+  const { theme } = useTheme();
+  return (
+    <div className={`checkbox horizontal-center ${theme}`}>
+      <input checked={checked} onChange={onChange} type="checkbox" />
+      <p
+        className={classNames('checkbox__text fw-700-xs', {
+          checked,
+        })}
+      >
+        {text}
+      </p>
+    </div>
+  );
+};
 
 export default Checkbox;
