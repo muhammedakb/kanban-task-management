@@ -5,14 +5,13 @@ import { NavLink } from 'react-router-dom';
 
 import { useTheme } from '@context/ThemeProvider';
 
-import { slugify } from '@utils/index';
-
 import './boardBarItem.scss';
 
 type BoardBarItemProps = {
   isCreateButton?: boolean;
   onClick?: () => void;
   text: string;
+  to?: string;
   type?: 'navbarItem' | 'hideSidebar';
 };
 
@@ -20,6 +19,7 @@ const BoardBarItem: FC<BoardBarItemProps> = ({
   isCreateButton = false,
   onClick,
   text,
+  to,
   type = 'navbarItem',
 }) => {
   const { theme } = useTheme();
@@ -33,7 +33,7 @@ const BoardBarItem: FC<BoardBarItemProps> = ({
         })
       }
       onClick={() => onClick?.()}
-      to={`/${slugify(text)}`}
+      to={to ?? ''}
     >
       <span className="bar__item__icon" />
       <span className="bar__item__text fw-700-m">{text}</span>

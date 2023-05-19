@@ -1,6 +1,7 @@
 import { useMemo, useReducer } from 'react';
 import classNames from 'classnames';
 import { Outlet, useLocation } from 'react-router-dom';
+import { useAppSelector } from 'store';
 
 import BoardBar from '@components/BoardBar';
 import Header from '@components/Header';
@@ -11,15 +12,17 @@ import EditBoard from '@components/Modals/EditBoard';
 
 import { useNavbarVisibility } from '@context/NavbarVisibilityProvider';
 
-import { deslugify } from '@utils/index';
+import { getBoards } from '@slices/selector';
 
-import data from '../../../data/data.json';
+import { deslugify } from '@utils/index';
 
 import { modalInitialState, modalReducer, Toggles } from './reducer';
 
 import '@components/Modals/addNew.scss';
 
 const Layout = () => {
+  const boards = useAppSelector(getBoards);
+
   const { pathname } = useLocation();
   const { isOpened, isMobileMenu } = useNavbarVisibility();
 
@@ -42,18 +45,18 @@ const Layout = () => {
   };
 
   const boardItems = useMemo(
-    () => data.boards.map((board) => ({ text: board.name })),
-    []
+    () => boards.map((board) => ({ id: board.id, text: board.name })),
+    [boards]
   );
 
-  const title = useMemo(() => deslugify(pathname.replace('/', '')), [pathname]);
+  const title = useMemo(() => deslugify(pathname.split('/')[1]), [pathname]);
 
   const boardColumns = useMemo(
     () =>
-      data.boards
+      boards
         ?.filter((board) => board.name === title)?.[0]
         ?.columns?.map((column) => column.name),
-    [title]
+    [boards, title]
   );
 
   return (

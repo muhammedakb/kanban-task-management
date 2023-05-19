@@ -2,6 +2,8 @@ import type { FC } from 'react';
 
 import { useTheme } from '@context/ThemeProvider';
 
+import { slugify } from '@utils/index';
+
 import BoardBarItem from '../BoardBarItem';
 import ThemeSelector from '../ThemeSelector';
 
@@ -21,6 +23,7 @@ const MobileBoardBar: FC<BoardBarProps> = ({ boardItems, onCreateClick }) => {
               key={item.text}
               onClick={item.onClick}
               text={item.text}
+              to={`/${slugify(item.text)}/${item.id}`}
             />
           ))}
           <BoardBarItem

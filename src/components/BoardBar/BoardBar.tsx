@@ -4,6 +4,8 @@ import { createPortal } from 'react-dom';
 import { useNavbarVisibility } from '@context/NavbarVisibilityProvider';
 import { useTheme } from '@context/ThemeProvider';
 
+import { slugify } from '@utils/index';
+
 import BoardBarItem from '../BoardBarItem';
 import ShowIcon from '../Icons/ShowIcon';
 import ThemeSelector from '../ThemeSelector';
@@ -13,7 +15,7 @@ import MobileBoardBar from './MobileBoardBar';
 import './boardBar.scss';
 
 export type BoardBarProps = {
-  boardItems: Array<{ text: string; onClick?: () => void }>;
+  boardItems: Array<{ id: string; text: string; onClick?: () => void }>;
   onCreateClick: () => void;
 };
 
@@ -41,6 +43,7 @@ const BoardBar: FC<BoardBarProps> = ({ boardItems, onCreateClick }) => {
               key={item.text}
               onClick={() => item.onClick?.()}
               text={item.text}
+              to={`/${slugify(item.text)}/${item.id}`}
             />
           ))}
           <BoardBarItem

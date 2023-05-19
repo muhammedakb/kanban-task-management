@@ -39,7 +39,7 @@ const AddNewColumn: FC<NewColumnProps> = ({ closeModal, istheModalOpen }) => (
             placeholder="e.g. Todo"
             value={values.columnName}
           />
-          <Button fullWidth text="Create New Board" type="submit" />
+          <Button fullWidth text="Create New Column" type="submit" />
         </Form>
       )}
     </Formik>

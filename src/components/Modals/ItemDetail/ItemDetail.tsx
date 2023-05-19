@@ -1,4 +1,4 @@
-import type { ColumnData } from 'types/types';
+import type { Column } from 'types/types';
 
 import Checkbox from '@components/Checkbox';
 import Modal from '@components/Modal';
@@ -12,7 +12,7 @@ type ItemDetailProps = {
   istheModalOpen: boolean;
   onDelete?: () => void;
   onEdit?: () => void;
-  openedItem?: ColumnData['tasks'][0];
+  openedItem?: Column['tasks'][0];
   options: Array<{ value: string; text: string }>;
 };
 
