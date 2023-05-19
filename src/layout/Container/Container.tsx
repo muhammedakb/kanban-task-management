@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useReducer, useState } from 'react';
 import type { FC } from 'react';
-import type { ColumnData } from 'types/types';
+import type { Column } from 'types/types';
 
 import BoardColumn from '@components/BoardColumn';
 import BoardContainer from '@components/BoardContainer';
@@ -13,12 +13,12 @@ import ItemDetail from '@components/Modals/ItemDetail';
 import { modalInitialState, modalReducer, Toggles } from './reducer';
 
 type ContainerProps = {
-  columns: ColumnData[];
+  columns: Column[];
 };
 
 const Container: FC<ContainerProps> = ({ columns }) => {
   const [state, dispatch] = useReducer(modalReducer, modalInitialState);
-  const [openedItem, setOpenedItem] = useState<ColumnData['tasks'][0]>();
+  const [openedItem, setOpenedItem] = useState<Column['tasks'][0]>();
 
   const completedSubTasks = useMemo(
     () => openedItem?.subtasks?.filter((item) => item.isCompleted).length,
@@ -48,7 +48,7 @@ const Container: FC<ContainerProps> = ({ columns }) => {
     [state.isItemDetailModalOn]
   );
 
-  const onItemClick = (item: ColumnData['tasks'][0]) => {
+  const onItemClick = (item: Column['tasks'][0]) => {
     setOpenedItem(item);
     toggleItemDetail();
   };

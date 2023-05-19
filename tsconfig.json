@@ -22,6 +22,7 @@
       "@context/*": ["context/*"],
       "@hooks/*": ["hooks/*"],
       "@layout/*": ["layout/*"],
+      "@slices/*": ["slices/*"],
       "@types/*": ["types/*"],
       "@utils/*": ["utils/*"]
     }

@@ -1,12 +1,26 @@
-export type ColumnData = {
+export type Boards = {
+  boards: Board[];
+};
+
+export type Board = {
+  id: string;
   name: string;
-  tasks: Array<{
-    title: string;
-    description: string;
-    status: string;
-    subtasks: Array<{
-      title: string;
-      isCompleted: boolean;
-    }>;
-  }>;
+  columns: Column[];
+};
+
+export type Column = {
+  name: string;
+  tasks: Task[];
+};
+
+export type Task = {
+  title: string;
+  description: string;
+  status: string;
+  subtasks: Subtask[];
+};
+
+export type Subtask = {
+  title: string;
+  isCompleted: boolean;
 };

@@ -31,6 +31,8 @@ module.exports = {
               ['^@hooks'],
               // Packages starting with `@layout`
               ['^@layout'],
+              // Packages starting with `@slices`
+              ['^@slices'],
               // Packages starting with `@types`
               ['^@types'],
               // Packages starting with `@utils`
@@ -93,5 +95,6 @@ module.exports = {
     'react/require-default-props': 'off',
     'simple-import-sort/exports': 'error',
     'simple-import-sort/imports': 'error',
+    'import/prefer-default-export': 'off',
   },
 };

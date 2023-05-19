@@ -2,6 +2,7 @@
   "boards": [
     {
       "name": "Platform Launch",
+      "id": "fa32f09a-b0d2-4b4d-a993-5930daf00e7d",
       "columns": [
         {
           "name": "Todo",
@@ -285,6 +286,7 @@
     },
     {
       "name": "Marketing Plan",
+      "id": "25afe704-9a46-4b7e-a4b0-96c3b8fbf93a",
       "columns": [
         {
           "name": "Todo",
@@ -376,6 +378,7 @@
     },
     {
       "name": "Roadmap",
+      "id": "1a5d03cf-0f15-40c1-9e5c-49c84edd3c4b",
       "columns": [
         {
           "name": "Now",
@@ -428,6 +431,7 @@
     },
     {
       "name": "React Jobs",
+      "id": "da0d2902-285e-4b45-bad1-e768fd482f0a",
       "columns": []
     }
   ]

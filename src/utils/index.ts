@@ -16,4 +16,20 @@ const deslugify = (slug: string): string => {
   return text;
 };
 
-export { deslugify, slugify };
+const generateID = (): string => {
+  const characters = 'abcdef0123456789';
+  let id = '';
+
+  // eslint-disable-next-line no-plusplus
+  for (let i = 0; i < 36; i++) {
+    if (i === 8 || i === 13 || i === 18 || i === 23) {
+      id += '-';
+    } else {
+      id += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+  }
+
+  return id;
+};
+
+export { deslugify, generateID, slugify };
