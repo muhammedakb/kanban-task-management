@@ -1,4 +1,4 @@
-import type { Board, Boards } from 'types/types';
+import type { Board, Boards, Task } from 'types/types';
 
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
@@ -19,7 +19,18 @@ export const taskSlice = createSlice({
       state.boards.push(action.payload);
     },
     // 2) Add New Task
-    addNewTask: (state, action) => {},
+    addNewTask: (state, action: PayloadAction<{ id: string; task: Task }>) => {
+      const { id, task } = action.payload;
+
+      const activeBoard = state?.boards?.find((board) => board.id === id);
+
+      if (activeBoard) {
+        const activeColumn = activeBoard.columns.find(
+          (column) => column.name === task.status
+        );
+        activeColumn?.tasks.push(task);
+      }
+    },
     // 3) Edit Board
     editBoard: (state, action) => {},
     // 4) Delete Board

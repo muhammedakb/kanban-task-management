@@ -1,3 +1,5 @@
+import type { Task, TaskForm } from 'types/types';
+
 /* eslint-disable no-useless-escape */
 const slugify = (text: string): string =>
   text
@@ -32,4 +34,14 @@ const generateID = (): string => {
   return id;
 };
 
-export { deslugify, generateID, slugify };
+const correctNewTaskFormData = (task: TaskForm): Task => ({
+  title: task.title,
+  description: task.description,
+  status: task.status,
+  subtasks: task.subtasks.map((subtask) => ({
+    title: subtask,
+    isCompleted: false,
+  })),
+});
+
+export { correctNewTaskFormData, deslugify, generateID, slugify };

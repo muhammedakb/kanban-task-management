@@ -20,6 +20,8 @@ export type Task = {
   subtasks: Subtask[];
 };
 
+export type TaskForm = Omit<Task, 'subtasks'> & { subtasks: string[] };
+
 export type Subtask = {
   title: string;
   isCompleted: boolean;
