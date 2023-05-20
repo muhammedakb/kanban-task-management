@@ -34,11 +34,14 @@ const generateID = (): string => {
   return id;
 };
 
+const checkSubtasks = (subtasks: string[]) =>
+  subtasks.filter((subtask) => subtask !== '');
+
 const correctNewTaskFormData = (task: TaskForm): Task => ({
   title: task.title,
   description: task.description,
   status: task.status,
-  subtasks: task.subtasks.map((subtask) => ({
+  subtasks: checkSubtasks(task.subtasks).map((subtask) => ({
     title: subtask,
     isCompleted: false,
   })),
