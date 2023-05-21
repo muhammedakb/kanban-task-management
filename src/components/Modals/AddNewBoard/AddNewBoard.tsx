@@ -1,5 +1,6 @@
 import { FieldArray, Form, Formik } from 'formik';
 import type { FC } from 'react';
+import { toast } from 'react-toastify';
 import { useAppDispatch } from 'store';
 import * as Yup from 'yup';
 
@@ -25,18 +26,24 @@ const AddNewBoard: FC<AddNewBoardProps> = ({ closeModal, istheModalOpen }) => {
   const dispatch = useAppDispatch();
 
   const onSubmit = (values: { name: string; columns: string[] }) => {
-    dispatch(
-      addNewBoard({
-        columns: values.columns.map((value) => ({
+    const emptyColumns = values.columns.every((column) => column === '');
+
+    const correctedColumns = emptyColumns
+      ? []
+      : values.columns.map((value) => ({
           name: value,
           tasks: [],
-        })),
+        }));
+
+    dispatch(
+      addNewBoard({
+        columns: correctedColumns,
         id: generateID(),
         name: values.name,
       })
     );
     closeModal();
-    // TODO: toastify
+    toast.success(`${values.name} added.`);
   };
 
   return (

@@ -1,8 +1,9 @@
 import { useMemo } from 'react';
 import { Form, Formik } from 'formik';
 import type { FC } from 'react';
-import { useLocation } from 'react-router-dom';
-import { useAppSelector } from 'store';
+import { toast } from 'react-toastify';
+import { useAppDispatch } from 'store';
+import type { TaskForm } from 'types/types';
 import * as Yup from 'yup';
 
 import Button from '@components/Button';
@@ -10,7 +11,11 @@ import Modal from '@components/Modal';
 import Select from '@components/Select';
 import TextField from '@components/TextField';
 
-import { getBoards } from '@slices/selector';
+import { useGetActiveTask } from '@hooks/useGetActiveTask';
+
+import { addNewTask } from '@slices/taskSlice';
+
+import { correctNewTaskFormData } from '@utils/index';
 
 import AddNewSubTask from './AddNewSubTask';
 
@@ -45,20 +50,28 @@ const AddNewTask: FC<AddNewTaskProps> = ({
   editMode,
   taskValues,
 }) => {
-  const boards = useAppSelector(getBoards);
-  const { pathname } = useLocation();
-  const boardId = pathname.split('/').at(-1);
+  const activeTask = useGetActiveTask();
+  const dispatch = useAppDispatch();
 
   const options = useMemo(
     () =>
-      boards
-        ?.find((board) => board?.id === boardId)
-        ?.columns?.map((column) => ({
-          text: column?.name,
-          value: column?.name?.toLocaleLowerCase?.('tr-TR'),
-        })),
-    [boards, boardId]
+      activeTask?.columns?.map((column) => ({
+        text: column?.name,
+        value: column?.name,
+      })),
+    [activeTask]
   );
+
+  const onSubmit = (values: TaskForm) => {
+    dispatch(
+      addNewTask({
+        id: activeTask?.id ?? '',
+        task: correctNewTaskFormData(values),
+      })
+    );
+    closeModal();
+    toast.success(`${values.title} task added.`);
+  };
 
   return (
     <Modal
@@ -71,10 +84,9 @@ const AddNewTask: FC<AddNewTaskProps> = ({
           title: taskValues?.title ?? '',
           description: taskValues?.description ?? '',
           subtasks: taskValues?.subtasks ?? ['', ''],
-          status:
-            taskValues?.status?.toLowerCase() ?? options?.[0]?.value ?? '',
+          status: taskValues?.status ?? options?.[0]?.value ?? '',
         }}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={onSubmit}
         validationSchema={validationSchema}
       >
         {({ handleChange, values, errors, setFieldValue }) => (

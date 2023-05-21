@@ -1,3 +1,5 @@
+import type { Task, TaskForm } from 'types/types';
+
 /* eslint-disable no-useless-escape */
 const slugify = (text: string): string =>
   text
@@ -32,4 +34,23 @@ const generateID = (): string => {
   return id;
 };
 
-export { deslugify, generateID, slugify };
+const checkSubtasks = (subtasks: string[]) =>
+  subtasks.filter((subtask) => subtask !== '');
+
+const correctNewTaskFormData = (task: TaskForm): Task => ({
+  title: task.title,
+  description: task.description,
+  status: task.status,
+  subtasks: checkSubtasks(task.subtasks).map((subtask) => ({
+    title: subtask,
+    isCompleted: false,
+  })),
+});
+
+const arrayEquals = (firstArr: unknown[], secondArr: unknown[]) =>
+  Array.isArray(firstArr) &&
+  Array.isArray(secondArr) &&
+  firstArr.length === secondArr.length &&
+  firstArr.every((val, index) => val === secondArr[index]);
+
+export { arrayEquals, correctNewTaskFormData, deslugify, generateID, slugify };

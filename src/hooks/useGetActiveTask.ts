@@ -5,7 +5,7 @@ import { createSelector } from '@reduxjs/toolkit';
 
 import { getBoards } from '@slices/selector';
 
-export const useBoardId = () => {
+export const useGetActiveTask = () => {
   const task = useAppSelector((state) => state.task);
 
   const { pathname } = useLocation();

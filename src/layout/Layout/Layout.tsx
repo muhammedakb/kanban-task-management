@@ -1,7 +1,8 @@
 import { useMemo, useReducer } from 'react';
 import classNames from 'classnames';
-import { Outlet, useLocation } from 'react-router-dom';
-import { useAppSelector } from 'store';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import { useAppDispatch, useAppSelector } from 'store';
 
 import BoardBar from '@components/BoardBar';
 import Header from '@components/Header';
@@ -11,17 +12,23 @@ import DeleteModal from '@components/Modals/DeleteModal';
 import EditBoard from '@components/Modals/EditBoard';
 
 import { useNavbarVisibility } from '@context/NavbarVisibilityProvider';
+import { useTheme } from '@context/ThemeProvider';
 
 import { getBoards } from '@slices/selector';
+import { deleteBoard } from '@slices/taskSlice';
 
 import { deslugify } from '@utils/index';
 
 import { modalInitialState, modalReducer, Toggles } from './reducer';
 
 import '@components/Modals/addNew.scss';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Layout = () => {
+  const reduxDispatch = useAppDispatch();
   const boards = useAppSelector(getBoards);
+  const { theme } = useTheme();
+  const navigate = useNavigate();
 
   const { pathname } = useLocation();
   const { isOpened, isMobileMenu } = useNavbarVisibility();
@@ -58,6 +65,13 @@ const Layout = () => {
         ?.columns?.map((column) => column.name),
     [boards, title]
   );
+
+  const onDelete = () => {
+    reduxDispatch(deleteBoard({ id: pathname.split('/').at(-1) ?? '' }));
+    navigate('/');
+    toast.success(`${title} is deleted.`);
+    toggleDeleteBoard();
+  };
 
   return (
     <>
@@ -102,11 +116,10 @@ const Layout = () => {
           boardName={title}
           closeModal={toggleDeleteBoard}
           istheModalOpen={state.isDeleteBoardModalOn}
-          onDelete={() => {
-            alert(`${title} - deleted`);
-          }}
+          onDelete={onDelete}
           type="board"
         />
+        <ToastContainer autoClose={2000} theme={theme} />
       </main>
     </>
   );
