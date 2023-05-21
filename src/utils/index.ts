@@ -47,4 +47,10 @@ const correctNewTaskFormData = (task: TaskForm): Task => ({
   })),
 });
 
-export { correctNewTaskFormData, deslugify, generateID, slugify };
+const arrayEquals = (firstArr: unknown[], secondArr: unknown[]) =>
+  Array.isArray(firstArr) &&
+  Array.isArray(secondArr) &&
+  firstArr.length === secondArr.length &&
+  firstArr.every((val, index) => val === secondArr[index]);
+
+export { arrayEquals, correctNewTaskFormData, deslugify, generateID, slugify };

@@ -21,6 +21,9 @@ export type Task = {
 };
 
 export type TaskForm = Omit<Task, 'subtasks'> & { subtasks: string[] };
+export type BoardForm = Omit<Board, 'columns'> & {
+  columns: Array<{ newValue: string; oldValue: string }>;
+};
 
 export type Subtask = {
   title: string;

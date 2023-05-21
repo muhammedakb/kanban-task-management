@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { Form, Formik } from 'formik';
 import type { FC } from 'react';
+import { toast } from 'react-toastify';
 import { useAppDispatch } from 'store';
 import type { TaskForm } from 'types/types';
 import * as Yup from 'yup';
@@ -69,7 +70,7 @@ const AddNewTask: FC<AddNewTaskProps> = ({
       })
     );
     closeModal();
-    // TODO: toastify
+    toast.success(`${values.title} task added.`);
   };
 
   return (

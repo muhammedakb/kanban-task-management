@@ -1,4 +1,5 @@
-import type { Board, Boards, Task } from 'types/types';
+/* eslint-disable no-param-reassign */
+import type { Board, BoardForm, Boards, Task } from 'types/types';
 
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
@@ -32,11 +33,63 @@ export const taskSlice = createSlice({
       }
     },
     // 3) Edit Board
-    editBoard: (state, action) => {},
+    editBoard: (state, action: PayloadAction<BoardForm>) => {
+      const { columns, id, name } = action.payload;
+
+      const activeBoardIndex = state.boards.findIndex(
+        (board) => board.id === id
+      );
+
+      if (activeBoardIndex !== -1) {
+        const activeBoard = state.boards[activeBoardIndex];
+
+        if (name !== activeBoard.name) {
+          activeBoard.name = name;
+        }
+
+        const columnMap = new Map();
+        const columnsDiff = columns.filter(
+          (column) => column.newValue !== column.oldValue
+        );
+
+        columnsDiff.forEach((diff) => {
+          columnMap.set(diff.oldValue, diff.newValue);
+        });
+
+        activeBoard.columns.forEach((column) => {
+          if (columnMap.has(column.name)) {
+            const newName = columnMap.get(column.name);
+            column.name = newName;
+            column.tasks.forEach((task) => {
+              task.status = newName;
+            });
+          }
+        });
+
+        state.boards[activeBoardIndex] = activeBoard;
+      }
+    },
     // 4) Delete Board
-    deleteBoard: (state, action) => {},
+    deleteBoard: (state, action: PayloadAction<{ id: string }>) => {
+      state.boards = state.boards.filter(
+        (board) => board.id !== action.payload.id
+      );
+    },
     // 5) Add New Column
-    addNewColumn: (state, action) => {},
+    addNewColumn: (
+      state,
+      action: PayloadAction<{ columnName: string; id: string }>
+    ) => {
+      const { columnName, id } = action.payload;
+      const activeBoard = state?.boards?.find((board) => board.id === id);
+
+      if (activeBoard) {
+        activeBoard.columns.push({
+          name: columnName,
+          tasks: [],
+        });
+      }
+    },
     // 6) Edit Task
     editTask: (state, action) => {},
     // 7) Delete Task
