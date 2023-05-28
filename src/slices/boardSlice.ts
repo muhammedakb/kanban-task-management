@@ -133,7 +133,28 @@ export const boardSlice = createSlice({
       }
     },
     // 7) Delete Task
-    deleteTask: (state, action) => {},
+    deleteTask: (
+      state,
+      action: PayloadAction<{
+        boardId: string;
+        taskId: string;
+      }>
+    ) => {
+      const { boardId, taskId } = action.payload;
+      const activeBoard = state.boards.find((board) => board.id === boardId);
+
+      const activeColumn = activeBoard?.columns?.find((column) =>
+        column?.tasks?.find((task) => task?.id === taskId)
+      );
+
+      const openedTaskIndex = activeColumn?.tasks.findIndex(
+        (task) => task.id === taskId
+      );
+
+      if (openedTaskIndex !== -1) {
+        activeColumn?.tasks?.splice(openedTaskIndex as number, 1);
+      }
+    },
     // 8) Subtask checkboxes (checked-unchecked)
     toggleSubtaskStatus: (state, action) => {},
     // 9) Task status change (select box)

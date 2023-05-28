@@ -1,5 +1,7 @@
 import { useCallback, useMemo, useReducer, useState } from 'react';
 import type { FC } from 'react';
+import { toast } from 'react-toastify';
+import { useAppDispatch } from 'store';
 import type { Column } from 'types/types';
 
 import BoardColumn from '@components/BoardColumn';
@@ -10,6 +12,10 @@ import EditTask from '@components/Modals/AddNewTask';
 import DeleteModal from '@components/Modals/DeleteModal';
 import ItemDetail from '@components/Modals/ItemDetail';
 
+import { useGetActiveBoard } from '@hooks/useGetActiveBoard';
+
+import { deleteTask } from '@slices/boardSlice';
+
 import { handleColor } from '@utils/index';
 
 import { modalInitialState, modalReducer, Toggles } from './reducer';
@@ -19,6 +25,8 @@ type ContainerProps = {
 };
 
 const Container: FC<ContainerProps> = ({ columns }) => {
+  const reduxDispatch = useAppDispatch();
+  const activeBoard = useGetActiveBoard();
   const [state, dispatch] = useReducer(modalReducer, modalInitialState);
   const [openedItem, setOpenedItem] = useState<Column['tasks'][0]>();
 
@@ -53,6 +61,17 @@ const Container: FC<ContainerProps> = ({ columns }) => {
   const onItemClick = (item: Column['tasks'][0]) => {
     setOpenedItem(item);
     toggleItemDetail();
+  };
+
+  const onTaskDelete = () => {
+    reduxDispatch(
+      deleteTask({
+        boardId: activeBoard?.id ?? '',
+        taskId: openedItem?.id ?? '',
+      })
+    );
+    toggleTask('delete');
+    toast.success(`${openedItem?.title} task deleted.`);
   };
 
   return (
@@ -110,9 +129,7 @@ const Container: FC<ContainerProps> = ({ columns }) => {
           <DeleteModal
             closeModal={() => toggleTask('delete')}
             istheModalOpen={state.isDeleteTaskModalOn}
-            onDelete={() => {
-              alert(`${openedItem?.title} - deleted`);
-            }}
+            onDelete={onTaskDelete}
             taskName={openedItem?.title ?? ''}
             type="task"
           />
