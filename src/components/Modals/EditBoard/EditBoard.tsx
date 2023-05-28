@@ -10,9 +10,9 @@ import CloseIcon from '@components/Icons/CloseIcon';
 import Modal from '@components/Modal/Modal';
 import TextField from '@components/TextField/TextField';
 
-import { useGetActiveTask } from '@hooks/useGetActiveTask';
+import { useGetActiveBoard } from '@hooks/useGetActiveBoard';
 
-import { editBoard } from '@slices/taskSlice';
+import { editBoard } from '@slices/boardSlice';
 
 import { arrayEquals, slugify } from '@utils/index';
 
@@ -39,7 +39,7 @@ const EditBoard: FC<EditBoardProps> = ({
   istheModalOpen,
 }) => {
   const navigate = useNavigate();
-  const activeTask = useGetActiveTask();
+  const activeBoard = useGetActiveBoard();
   const dispatch = useAppDispatch();
 
   const checkSameValues = (name: string, boardColumns: string[]) => {
@@ -61,14 +61,14 @@ const EditBoard: FC<EditBoardProps> = ({
       dispatch(
         editBoard({
           columns: columnValues,
-          id: activeTask?.id ?? '',
+          id: activeBoard?.id ?? '',
           name: values.boardName,
         })
       );
       closeModal();
       toast.success('Edit successful.');
       if (boardName !== values.boardName) {
-        navigate(`/${slugify(values.boardName)}/${activeTask?.id}`);
+        navigate(`/${slugify(values.boardName)}/${activeBoard?.id}`);
       }
     }
   };

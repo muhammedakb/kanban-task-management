@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { configureStore } from '@reduxjs/toolkit';
 
-import taskSlice from '@slices/taskSlice';
+import boardSlice from '@slices/boardSlice';
 
 export const store = configureStore({
   reducer: {
-    task: taskSlice,
+    board: boardSlice,
   },
 });
 

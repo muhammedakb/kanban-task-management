@@ -10,6 +10,8 @@ import EditTask from '@components/Modals/AddNewTask';
 import DeleteModal from '@components/Modals/DeleteModal';
 import ItemDetail from '@components/Modals/ItemDetail';
 
+import { handleColor } from '@utils/index';
+
 import { modalInitialState, modalReducer, Toggles } from './reducer';
 
 type ContainerProps = {
@@ -51,19 +53,6 @@ const Container: FC<ContainerProps> = ({ columns }) => {
   const onItemClick = (item: Column['tasks'][0]) => {
     setOpenedItem(item);
     toggleItemDetail();
-  };
-
-  const handleColor = (index: number): string => {
-    switch (index) {
-      case 0:
-        return '#49C4E5';
-      case 1:
-        return '#8471F2';
-      case 2:
-        return '#67E2AE';
-      default:
-        return '#49C4E5';
-    }
   };
 
   return (
@@ -111,12 +100,11 @@ const Container: FC<ContainerProps> = ({ columns }) => {
             closeModal={() => toggleTask('edit')}
             istheModalOpen={state.isEditTaskModalOn}
             taskValues={{
+              id: openedItem?.id ?? '',
               status: openedItem?.status ?? '',
               title: openedItem?.title ?? '',
               description: openedItem?.description ?? '',
-              subtasks: openedItem?.subtasks?.map(
-                (subtask) => subtask.title
-              ) ?? [''],
+              subtasks: openedItem?.subtasks ?? [],
             }}
           />
           <DeleteModal

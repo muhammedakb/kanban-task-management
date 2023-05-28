@@ -1,9 +1,9 @@
-import { useMemo } from 'react';
+import { memo, useMemo } from 'react';
 import { Form, Formik } from 'formik';
 import type { FC } from 'react';
 import { toast } from 'react-toastify';
 import { useAppDispatch } from 'store';
-import type { TaskForm } from 'types/types';
+import type { Task, TaskForm } from 'types/types';
 import * as Yup from 'yup';
 
 import Button from '@components/Button';
@@ -11,9 +11,9 @@ import Modal from '@components/Modal';
 import Select from '@components/Select';
 import TextField from '@components/TextField';
 
-import { useGetActiveTask } from '@hooks/useGetActiveTask';
+import { useGetActiveBoard } from '@hooks/useGetActiveBoard';
 
-import { addNewTask } from '@slices/taskSlice';
+import { addNewTask, editTask } from '@slices/boardSlice';
 
 import { correctNewTaskFormData } from '@utils/index';
 
@@ -26,12 +26,7 @@ type AddNewTaskProps =
     } & (
       | {
           editMode?: true;
-          taskValues: {
-            title: string;
-            description?: string;
-            subtasks?: Array<string>;
-            status: string;
-          };
+          taskValues: Task;
         }
       | {
           editMode?: false;
@@ -50,27 +45,50 @@ const AddNewTask: FC<AddNewTaskProps> = ({
   editMode,
   taskValues,
 }) => {
-  const activeTask = useGetActiveTask();
+  const activeBoard = useGetActiveBoard();
   const dispatch = useAppDispatch();
 
   const options = useMemo(
     () =>
-      activeTask?.columns?.map((column) => ({
+      activeBoard?.columns?.map((column) => ({
         text: column?.name,
         value: column?.name,
       })),
-    [activeTask]
+    [activeBoard]
   );
 
   const onSubmit = (values: TaskForm) => {
-    dispatch(
-      addNewTask({
-        id: activeTask?.id ?? '',
-        task: correctNewTaskFormData(values),
-      })
-    );
-    closeModal();
-    toast.success(`${values.title} task added.`);
+    if (editMode) {
+      const updatedSubtasks = values.subtasks.map((subtask, index) => ({
+        ...taskValues.subtasks[index],
+        title: subtask,
+      }));
+
+      dispatch(
+        editTask({
+          boardId: activeBoard?.id ?? '',
+          taskId: taskValues?.id ?? '',
+          values: {
+            description: values.description,
+            status: values.status,
+            subtasks: updatedSubtasks,
+            title: values.title,
+            id: taskValues?.id ?? '',
+          },
+        })
+      );
+      closeModal();
+      toast.success(`${values.title} task edited.`);
+    } else {
+      dispatch(
+        addNewTask({
+          id: activeBoard?.id ?? '',
+          task: correctNewTaskFormData(values),
+        })
+      );
+      closeModal();
+      toast.success(`${values.title} task added.`);
+    }
   };
 
   return (
@@ -83,7 +101,10 @@ const AddNewTask: FC<AddNewTaskProps> = ({
         initialValues={{
           title: taskValues?.title ?? '',
           description: taskValues?.description ?? '',
-          subtasks: taskValues?.subtasks ?? ['', ''],
+          subtasks: taskValues?.subtasks?.map((subtask) => subtask.title) ?? [
+            '',
+            '',
+          ],
           status: taskValues?.status ?? options?.[0]?.value ?? '',
         }}
         onSubmit={onSubmit}
@@ -131,4 +152,4 @@ const AddNewTask: FC<AddNewTaskProps> = ({
   );
 };
 
-export default AddNewTask;
+export default memo(AddNewTask);

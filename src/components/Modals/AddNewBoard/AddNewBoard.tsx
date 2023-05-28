@@ -9,7 +9,7 @@ import CloseIcon from '@components/Icons/CloseIcon';
 import Modal from '@components/Modal';
 import TextField from '@components/TextField';
 
-import { addNewBoard } from '@slices/taskSlice';
+import { addNewBoard } from '@slices/boardSlice';
 
 import { generateID } from '@utils/index';
 
