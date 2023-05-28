@@ -5,17 +5,17 @@ import { createSelector } from '@reduxjs/toolkit';
 
 import { getBoards } from '@slices/selector';
 
-export const useGetActiveTask = () => {
-  const task = useAppSelector((state) => state.task);
+export const useGetActiveBoard = () => {
+  const activeBoard = useAppSelector((state) => state.board);
 
   const { pathname } = useLocation();
   const id = pathname.split('/').at(-1);
 
-  const findedTask = createSelector(getBoards, (boards) =>
+  const findedBoard = createSelector(getBoards, (boards) =>
     boards.find((board) => board.id === id)
   );
 
-  const activeTask = findedTask({ task });
+  const activeTask = findedBoard({ board: activeBoard });
 
   return activeTask;
 };

@@ -14,8 +14,8 @@ import EditBoard from '@components/Modals/EditBoard';
 import { useNavbarVisibility } from '@context/NavbarVisibilityProvider';
 import { useTheme } from '@context/ThemeProvider';
 
+import { deleteBoard } from '@slices/boardSlice';
 import { getBoards } from '@slices/selector';
-import { deleteBoard } from '@slices/taskSlice';
 
 import { deslugify } from '@utils/index';
 

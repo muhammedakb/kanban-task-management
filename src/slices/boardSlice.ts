@@ -10,7 +10,7 @@ const initialState: Boards = {
   boards: data.boards ?? [],
 };
 
-export const taskSlice = createSlice({
+export const boardSlice = createSlice({
   name: 'task',
   initialState,
   reducers: {
@@ -91,7 +91,47 @@ export const taskSlice = createSlice({
       }
     },
     // 6) Edit Task
-    editTask: (state, action) => {},
+    editTask: (
+      state,
+      action: PayloadAction<{
+        boardId: string;
+        taskId: string;
+        values: Task;
+      }>
+    ) => {
+      const { boardId, taskId, values } = action.payload;
+      const activeBoard = state.boards.find((board) => board.id === boardId);
+
+      const activeColumn = activeBoard?.columns?.find((column) =>
+        column?.tasks?.find((task) => task?.id === taskId)
+      );
+
+      const openedTaskIndex = activeColumn?.tasks.findIndex(
+        (task) => task.id === taskId
+      );
+
+      if (openedTaskIndex !== -1) {
+        const newTask = {
+          description: values.description,
+          status: values.status,
+          subtasks: values.subtasks,
+          title: values.title,
+          id: taskId,
+        };
+        if (
+          activeColumn?.tasks[openedTaskIndex as number]?.status !==
+          values.status
+        ) {
+          activeColumn?.tasks?.splice(openedTaskIndex as number, 1);
+
+          activeBoard?.columns
+            ?.find((column) => column.name === values.status)
+            ?.tasks.push(newTask);
+        } else {
+          activeColumn.tasks[openedTaskIndex as number] = newTask;
+        }
+      }
+    },
     // 7) Delete Task
     deleteTask: (state, action) => {},
     // 8) Subtask checkboxes (checked-unchecked)
@@ -111,6 +151,6 @@ export const {
   editTask,
   toggleSubtaskStatus,
   toggleTaskStatus,
-} = taskSlice.actions;
+} = boardSlice.actions;
 
-export default taskSlice.reducer;
+export default boardSlice.reducer;

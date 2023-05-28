@@ -4,7 +4,7 @@ import type { FC } from 'react';
 import { useNavbarVisibility } from '@context/NavbarVisibilityProvider';
 import { useTheme } from '@context/ThemeProvider';
 
-import { useGetActiveTask } from '@hooks/useGetActiveTask';
+import { useGetActiveBoard } from '@hooks/useGetActiveBoard';
 import useWindowSize from '@hooks/useWindowSize';
 
 import Button from '../Button';
@@ -23,7 +23,7 @@ type HeaderProps = {
 };
 
 const Header: FC<HeaderProps> = ({ menuItems, onAddNewTaskClick, title }) => {
-  const activeTask = useGetActiveTask();
+  const activeBoard = useGetActiveBoard();
 
   const { width } = useWindowSize();
   const { isOpened, setIsOpened } = useNavbarVisibility();
@@ -45,7 +45,7 @@ const Header: FC<HeaderProps> = ({ menuItems, onAddNewTaskClick, title }) => {
       </div>
       <div className="header__process horizontal-center">
         <Button
-          disabled={(activeTask?.columns?.length ?? 0) < 1}
+          disabled={(activeBoard?.columns?.length ?? 0) < 1}
           onClick={onAddNewTaskClick}
           size={width > 570 ? 'small' : 'xsmall'}
           text={width > 570 ? '+ Add New Task' : <AddIcon />}

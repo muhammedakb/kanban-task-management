@@ -38,6 +38,7 @@ const checkSubtasks = (subtasks: string[]) =>
   subtasks.filter((subtask) => subtask !== '');
 
 const correctNewTaskFormData = (task: TaskForm): Task => ({
+  id: generateID(),
   title: task.title,
   description: task.description,
   status: task.status,
@@ -53,4 +54,24 @@ const arrayEquals = (firstArr: unknown[], secondArr: unknown[]) =>
   firstArr.length === secondArr.length &&
   firstArr.every((val, index) => val === secondArr[index]);
 
-export { arrayEquals, correctNewTaskFormData, deslugify, generateID, slugify };
+const handleColor = (index: number): string => {
+  switch (index) {
+    case 0:
+      return '#49C4E5';
+    case 1:
+      return '#8471F2';
+    case 2:
+      return '#67E2AE';
+    default:
+      return '#49C4E5';
+  }
+};
+
+export {
+  arrayEquals,
+  correctNewTaskFormData,
+  deslugify,
+  generateID,
+  handleColor,
+  slugify,
+};

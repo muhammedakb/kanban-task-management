@@ -8,9 +8,9 @@ import Button from '@components/Button/Button';
 import Modal from '@components/Modal/Modal';
 import TextField from '@components/TextField/TextField';
 
-import { useGetActiveTask } from '@hooks/useGetActiveTask';
+import { useGetActiveBoard } from '@hooks/useGetActiveBoard';
 
-import { addNewColumn } from '@slices/taskSlice';
+import { addNewColumn } from '@slices/boardSlice';
 
 type NewColumnProps = {
   closeModal: () => void;
@@ -22,14 +22,14 @@ const validationSchema = Yup.object({
 });
 
 const AddNewColumn: FC<NewColumnProps> = ({ closeModal, istheModalOpen }) => {
-  const activeTask = useGetActiveTask();
+  const activeBoard = useGetActiveBoard();
   const dispatch = useAppDispatch();
 
   const onSubmit = ({ columnName }: { columnName: string }) => {
     dispatch(
       addNewColumn({
         columnName,
-        id: activeTask?.id ?? '',
+        id: activeBoard?.id ?? '',
       })
     );
     closeModal();
