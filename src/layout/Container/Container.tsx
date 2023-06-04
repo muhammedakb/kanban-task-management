@@ -12,11 +12,11 @@ import EditTask from '@components/Modals/AddNewTask';
 import DeleteModal from '@components/Modals/DeleteModal';
 import ItemDetail from '@components/Modals/ItemDetail';
 
-import { useGetActiveBoard } from '@hooks/useGetActiveBoard';
+import { useGetOpenedItem } from '@hooks/useGetOpenedItem';
 
 import { deleteTask } from '@slices/boardSlice';
 
-import { handleColor } from '@utils/index';
+import { handleColor, taskNameEllipsis } from '@utils/index';
 
 import { modalInitialState, modalReducer, Toggles } from './reducer';
 
@@ -26,9 +26,11 @@ type ContainerProps = {
 
 const Container: FC<ContainerProps> = ({ columns }) => {
   const reduxDispatch = useAppDispatch();
-  const activeBoard = useGetActiveBoard();
   const [state, dispatch] = useReducer(modalReducer, modalInitialState);
-  const [openedItem, setOpenedItem] = useState<Column['tasks'][0]>();
+
+  const [openedItemID, setOpenedItemID] = useState<string>();
+
+  const { activeBoard, openedItem } = useGetOpenedItem(openedItemID ?? '');
 
   const completedSubTasks = useMemo(
     () => openedItem?.subtasks?.filter((item) => item.isCompleted).length,
@@ -58,8 +60,8 @@ const Container: FC<ContainerProps> = ({ columns }) => {
     [state.isItemDetailModalOn]
   );
 
-  const onItemClick = (item: Column['tasks'][0]) => {
-    setOpenedItem(item);
+  const onItemClick = (itemId: string) => {
+    setOpenedItemID(itemId);
     toggleItemDetail();
   };
 
@@ -71,7 +73,7 @@ const Container: FC<ContainerProps> = ({ columns }) => {
       })
     );
     toggleTask('delete');
-    toast.success(`${openedItem?.title} task deleted.`);
+    toast.success(`${taskNameEllipsis(openedItem?.title ?? '')} task deleted.`);
   };
 
   return (
@@ -111,7 +113,7 @@ const Container: FC<ContainerProps> = ({ columns }) => {
             istheModalOpen={state.isItemDetailModalOn}
             onDelete={() => toggleTask('delete')}
             onEdit={() => toggleTask('edit')}
-            openedItem={openedItem}
+            openedItemID={openedItemID}
             options={options}
           />
           <EditTask

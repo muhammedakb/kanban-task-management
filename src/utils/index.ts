@@ -67,6 +67,9 @@ const handleColor = (index: number): string => {
   }
 };
 
+const taskNameEllipsis = (name: string): string =>
+  name?.length > 17 ? `${name?.slice(0, 17)}...` : name;
+
 export {
   arrayEquals,
   correctNewTaskFormData,
@@ -74,4 +77,5 @@ export {
   generateID,
   handleColor,
   slugify,
+  taskNameEllipsis,
 };

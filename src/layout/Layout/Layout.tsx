@@ -17,7 +17,7 @@ import { useTheme } from '@context/ThemeProvider';
 import { deleteBoard } from '@slices/boardSlice';
 import { getBoards } from '@slices/selector';
 
-import { deslugify } from '@utils/index';
+import { deslugify, taskNameEllipsis } from '@utils/index';
 
 import { modalInitialState, modalReducer, Toggles } from './reducer';
 
@@ -69,7 +69,7 @@ const Layout = () => {
   const onDelete = () => {
     reduxDispatch(deleteBoard({ id: pathname.split('/').at(-1) ?? '' }));
     navigate('/');
-    toast.success(`${title} is deleted.`);
+    toast.success(`${taskNameEllipsis(title)} is deleted.`);
     toggleDeleteBoard();
   };
 

@@ -15,7 +15,7 @@ import { useGetActiveBoard } from '@hooks/useGetActiveBoard';
 
 import { addNewTask, editTask } from '@slices/boardSlice';
 
-import { correctNewTaskFormData } from '@utils/index';
+import { correctNewTaskFormData, taskNameEllipsis } from '@utils/index';
 
 import AddNewSubTask from './AddNewSubTask';
 
@@ -78,7 +78,7 @@ const AddNewTask: FC<AddNewTaskProps> = ({
         })
       );
       closeModal();
-      toast.success(`${values.title} task edited.`);
+      toast.success(`${taskNameEllipsis(values.title)} task edited.`);
     } else {
       dispatch(
         addNewTask({
@@ -87,7 +87,7 @@ const AddNewTask: FC<AddNewTaskProps> = ({
         })
       );
       closeModal();
-      toast.success(`${values.title} task added.`);
+      toast.success(`${taskNameEllipsis(values.title)} task added.`);
     }
   };
 
