@@ -1,5 +1,7 @@
 import { useCallback, useMemo, useReducer, useState } from 'react';
 import type { FC } from 'react';
+import { toast } from 'react-toastify';
+import { useAppDispatch } from 'store';
 import type { Column } from 'types/types';
 
 import BoardColumn from '@components/BoardColumn';
@@ -10,7 +12,11 @@ import EditTask from '@components/Modals/AddNewTask';
 import DeleteModal from '@components/Modals/DeleteModal';
 import ItemDetail from '@components/Modals/ItemDetail';
 
-import { handleColor } from '@utils/index';
+import { useGetOpenedItem } from '@hooks/useGetOpenedItem';
+
+import { deleteTask } from '@slices/boardSlice';
+
+import { handleColor, taskNameEllipsis } from '@utils/index';
 
 import { modalInitialState, modalReducer, Toggles } from './reducer';
 
@@ -19,8 +25,12 @@ type ContainerProps = {
 };
 
 const Container: FC<ContainerProps> = ({ columns }) => {
+  const reduxDispatch = useAppDispatch();
   const [state, dispatch] = useReducer(modalReducer, modalInitialState);
-  const [openedItem, setOpenedItem] = useState<Column['tasks'][0]>();
+
+  const [openedItemID, setOpenedItemID] = useState<string>();
+
+  const { activeBoard, openedItem } = useGetOpenedItem(openedItemID ?? '');
 
   const completedSubTasks = useMemo(
     () => openedItem?.subtasks?.filter((item) => item.isCompleted).length,
@@ -50,9 +60,20 @@ const Container: FC<ContainerProps> = ({ columns }) => {
     [state.isItemDetailModalOn]
   );
 
-  const onItemClick = (item: Column['tasks'][0]) => {
-    setOpenedItem(item);
+  const onItemClick = (itemId: string) => {
+    setOpenedItemID(itemId);
     toggleItemDetail();
+  };
+
+  const onTaskDelete = () => {
+    reduxDispatch(
+      deleteTask({
+        boardId: activeBoard?.id ?? '',
+        taskId: openedItem?.id ?? '',
+      })
+    );
+    toggleTask('delete');
+    toast.success(`${taskNameEllipsis(openedItem?.title ?? '')} task deleted.`);
   };
 
   return (
@@ -92,7 +113,7 @@ const Container: FC<ContainerProps> = ({ columns }) => {
             istheModalOpen={state.isItemDetailModalOn}
             onDelete={() => toggleTask('delete')}
             onEdit={() => toggleTask('edit')}
-            openedItem={openedItem}
+            openedItemID={openedItemID}
             options={options}
           />
           <EditTask
@@ -110,9 +131,7 @@ const Container: FC<ContainerProps> = ({ columns }) => {
           <DeleteModal
             closeModal={() => toggleTask('delete')}
             istheModalOpen={state.isDeleteTaskModalOn}
-            onDelete={() => {
-              alert(`${openedItem?.title} - deleted`);
-            }}
+            onDelete={onTaskDelete}
             taskName={openedItem?.title ?? ''}
             type="task"
           />

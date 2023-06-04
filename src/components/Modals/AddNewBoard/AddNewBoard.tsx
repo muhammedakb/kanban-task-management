@@ -11,7 +11,7 @@ import TextField from '@components/TextField';
 
 import { addNewBoard } from '@slices/boardSlice';
 
-import { generateID } from '@utils/index';
+import { generateID, taskNameEllipsis } from '@utils/index';
 
 type AddNewBoardProps = {
   closeModal: () => void;
@@ -43,7 +43,7 @@ const AddNewBoard: FC<AddNewBoardProps> = ({ closeModal, istheModalOpen }) => {
       })
     );
     closeModal();
-    toast.success(`${values.name} added.`);
+    toast.success(`${taskNameEllipsis(values.name)} added.`);
   };
 
   return (

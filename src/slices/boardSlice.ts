@@ -14,7 +14,6 @@ export const boardSlice = createSlice({
   name: 'task',
   initialState,
   reducers: {
-    // TODO
     // 1) Add New Board
     addNewBoard: (state, action: PayloadAction<Board>) => {
       state.boards.push(action.payload);
@@ -133,11 +132,85 @@ export const boardSlice = createSlice({
       }
     },
     // 7) Delete Task
-    deleteTask: (state, action) => {},
+    deleteTask: (
+      state,
+      action: PayloadAction<{
+        boardId: string;
+        taskId: string;
+      }>
+    ) => {
+      const { boardId, taskId } = action.payload;
+      const activeBoard = state.boards.find((board) => board.id === boardId);
+
+      const activeColumn = activeBoard?.columns?.find((column) =>
+        column?.tasks?.find((task) => task?.id === taskId)
+      );
+
+      const openedTaskIndex = activeColumn?.tasks.findIndex(
+        (task) => task.id === taskId
+      );
+
+      if (openedTaskIndex !== -1) {
+        activeColumn?.tasks?.splice(openedTaskIndex as number, 1);
+      }
+    },
     // 8) Subtask checkboxes (checked-unchecked)
-    toggleSubtaskStatus: (state, action) => {},
+    toggleSubtaskStatus: (
+      state,
+      action: PayloadAction<{
+        boardId: string;
+        checked: boolean;
+        subtaskId: string;
+        taskId: string;
+      }>
+    ) => {
+      const { boardId, checked, subtaskId, taskId } = action.payload;
+      const activeBoard = state.boards.find((board) => board.id === boardId);
+
+      const activeColumn = activeBoard?.columns?.find((column) =>
+        column?.tasks?.find((task) => task?.id === taskId)
+      );
+
+      const openedTask = activeColumn?.tasks.find((task) => task.id === taskId);
+
+      const subtaskIndex = openedTask?.subtasks?.findIndex(
+        (subtask) => subtask?.id === subtaskId
+      );
+
+      if (subtaskIndex !== -1 && openedTask) {
+        openedTask.subtasks[subtaskIndex as number].isCompleted = checked;
+      }
+    },
     // 9) Task status change (select box)
-    toggleTaskStatus: (state, action) => {},
+    toggleTaskStatus: (
+      state,
+      action: PayloadAction<{
+        boardId: string;
+        status: string;
+        taskId: string;
+      }>
+    ) => {
+      const { boardId, status, taskId } = action.payload;
+      const activeBoard = state.boards.find((board) => board.id === boardId);
+
+      const activeColumn = activeBoard?.columns?.find((column) =>
+        column?.tasks?.find((task) => task?.id === taskId)
+      );
+
+      const openedTaskIndex = activeColumn?.tasks.findIndex(
+        (task) => task.id === taskId
+      );
+
+      if (openedTaskIndex !== -1 && activeColumn) {
+        const currentTask = activeColumn.tasks[openedTaskIndex as number];
+
+        activeColumn?.tasks?.splice(openedTaskIndex as number, 1);
+
+        activeBoard?.columns
+          ?.find((column) => column.name === status)
+          ?.tasks.push({ ...currentTask, status });
+      }
+    },
   },
 });
 

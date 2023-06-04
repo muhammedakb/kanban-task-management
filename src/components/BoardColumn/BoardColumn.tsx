@@ -9,7 +9,7 @@ import './boardColumn.scss';
 type BoardColumnProps = {
   categoryTitleColor: string;
   columnData: Column;
-  onItemClick: (item: Column['tasks'][0]) => void;
+  onItemClick: (itemId: string) => void;
 };
 
 const BoardColumn: FC<BoardColumnProps> = ({
@@ -35,7 +35,7 @@ const BoardColumn: FC<BoardColumnProps> = ({
           <BoardItem
             key={item.title}
             completedSubTasks={completedSubTasks}
-            onItemClick={() => onItemClick(item)}
+            onItemClick={() => onItemClick(item.id ?? '')}
             subTasks={item.subtasks.length}
             taskTitle={item.title}
           />

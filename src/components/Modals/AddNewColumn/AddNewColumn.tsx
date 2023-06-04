@@ -12,6 +12,8 @@ import { useGetActiveBoard } from '@hooks/useGetActiveBoard';
 
 import { addNewColumn } from '@slices/boardSlice';
 
+import { taskNameEllipsis } from '@utils/index';
+
 type NewColumnProps = {
   closeModal: () => void;
   istheModalOpen: boolean;
@@ -33,7 +35,7 @@ const AddNewColumn: FC<NewColumnProps> = ({ closeModal, istheModalOpen }) => {
       })
     );
     closeModal();
-    toast.success(`${columnName} column added.`);
+    toast.success(`${taskNameEllipsis(columnName)} column added.`);
   };
 
   return (
