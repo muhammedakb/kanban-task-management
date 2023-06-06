@@ -86,7 +86,7 @@ const ItemDetail = ({
           <Checkbox
             key={subtask.title}
             checked={subtask.isCompleted}
-            onChange={(e) => onSubtaskCheck(e.target.checked, subtask.id ?? '')}
+            onChange={(value) => onSubtaskCheck(value, subtask.id ?? '')}
             text={subtask.title}
           />
         ))}
