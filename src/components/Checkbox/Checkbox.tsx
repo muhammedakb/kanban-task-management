@@ -1,4 +1,6 @@
+import { useCallback, useState } from 'react';
 import classNames from 'classnames';
+import type { FC } from 'react';
 
 import { useTheme } from '@context/ThemeProvider';
 
@@ -6,19 +8,37 @@ import './checkbox.scss';
 
 type CheckboxProps = {
   checked?: boolean;
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  onChange?: (value: boolean) => void;
   text: string;
 };
 
-const Checkbox = ({ checked, onChange, text }: CheckboxProps) => {
+const Checkbox: FC<CheckboxProps> = ({ checked, onChange, text }) => {
   const { theme } = useTheme();
+  const [isChecked, setIsChecked] = useState(checked ?? false);
+
+  const handleContainerClick = useCallback(() => {
+    setIsChecked((prevValue) => !prevValue);
+    onChange?.(!isChecked);
+  }, [isChecked, onChange]);
+
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setIsChecked(event.target.checked);
+    onChange?.(event.target.checked);
+  };
+
   return (
-    // TODO: if click any area not including checkbox => setChecked
-    <div className={`checkbox horizontal-center ${theme}`}>
-      <input checked={checked} onChange={onChange} type="checkbox" />
+    <div
+      className={`checkbox horizontal-center ${theme}`}
+      onClick={handleContainerClick}
+    >
+      <input
+        checked={isChecked}
+        onChange={handleCheckboxChange}
+        type="checkbox"
+      />
       <p
         className={classNames('checkbox__text fw-700-xs', {
-          checked,
+          isChecked,
         })}
       >
         {text}
