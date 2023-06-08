@@ -3,9 +3,9 @@ import { useAppSelector } from 'store';
 
 import { getBoards } from '@slices/selector';
 
-import Container from './layout/Container/Container';
+import Container from './layout/Container';
 import NoMatch from './layout/Container/NoMatch';
-import Layout from './layout/Layout/Layout';
+import Layout from './layout/Layout';
 import { slugify } from './utils';
 
 const Router = () => {
@@ -17,8 +17,8 @@ const Router = () => {
           <Route
             element={
               <Navigate
-                to={`${slugify(boards?.at?.(0)?.name as string)}/${
-                  boards?.at?.(0)?.id
+                to={`${slugify(boards?.at?.(0)?.name ?? '')}/${
+                  boards?.at?.(0)?.id ?? ''
                 }`}
               />
             }

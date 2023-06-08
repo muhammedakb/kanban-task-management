@@ -119,6 +119,7 @@ const Layout = () => {
           onDelete={onDelete}
           type="board"
         />
+        {/* change toastify library => react-hot-toast */}
         <ToastContainer autoClose={2000} theme={theme} />
       </main>
     </>
