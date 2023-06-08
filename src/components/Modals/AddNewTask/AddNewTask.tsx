@@ -15,7 +15,11 @@ import { useGetActiveBoard } from '@hooks/useGetActiveBoard';
 
 import { addNewTask, editTask } from '@slices/boardSlice';
 
-import { correctNewTaskFormData, taskNameEllipsis } from '@utils/index';
+import {
+  correctNewTaskFormData,
+  generateID,
+  taskNameEllipsis,
+} from '@utils/index';
 
 import AddNewSubTask from './AddNewSubTask';
 
@@ -62,6 +66,7 @@ const AddNewTask: FC<AddNewTaskProps> = ({
       const updatedSubtasks = values.subtasks.map((subtask, index) => ({
         ...taskValues.subtasks[index],
         title: subtask,
+        id: generateID(),
       }));
 
       dispatch(

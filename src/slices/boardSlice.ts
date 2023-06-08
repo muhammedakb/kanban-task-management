@@ -4,6 +4,8 @@ import type { Board, BoardForm, Boards, Task } from 'types/types';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
+import { generateID } from '@utils/index';
+
 import data from '../../data/data.json';
 
 const initialState: Boards = {
@@ -86,6 +88,7 @@ export const boardSlice = createSlice({
         activeBoard.columns.push({
           name: columnName,
           tasks: [],
+          id: generateID(),
         });
       }
     },

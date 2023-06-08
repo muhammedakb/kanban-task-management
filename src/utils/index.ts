@@ -43,8 +43,9 @@ const correctNewTaskFormData = (task: TaskForm): Task => ({
   description: task.description,
   status: task.status,
   subtasks: checkSubtasks(task.subtasks).map((subtask) => ({
-    title: subtask,
+    id: generateID(),
     isCompleted: false,
+    title: subtask,
   })),
 });
 
