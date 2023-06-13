@@ -1,6 +1,8 @@
 import classNames from 'classnames';
 import type { FC } from 'react';
 
+import { Themes } from '@@types/enums';
+
 import { useTheme } from '@context/ThemeProvider';
 
 import Switch from '../Switch';
@@ -13,13 +15,13 @@ const ThemeSelector: FC = () => {
     <div className={`theme-selector space-between ${theme}`}>
       <span
         className={classNames('theme-selector__light-icon', {
-          active: theme === 'light',
+          active: theme === Themes.Light,
         })}
       />
-      <Switch checked={theme === 'dark'} onChange={toggleTheme} />
+      <Switch checked={theme === Themes.Dark} onChange={toggleTheme} />
       <span
         className={classNames('theme-selector__dark-icon', {
-          active: theme === 'dark',
+          active: theme === Themes.Dark,
         })}
       />
     </div>

@@ -1,8 +1,10 @@
 import { useMemo, useReducer } from 'react';
 import classNames from 'classnames';
+import toast, { Toaster } from 'react-hot-toast';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify';
 import { useAppDispatch, useAppSelector } from 'store';
+
+import { Themes } from '@@types/enums';
 
 import BoardBar from '@components/BoardBar';
 import Header from '@components/Header';
@@ -17,7 +19,7 @@ import { useTheme } from '@context/ThemeProvider';
 import { deleteBoard } from '@slices/boardSlice';
 import { getBoards } from '@slices/selector';
 
-import { deslugify, taskNameEllipsis } from '@utils/index';
+import { addEllipsis, deslugify } from '@utils/index';
 
 import { modalInitialState, modalReducer, Toggles } from './reducer';
 
@@ -58,6 +60,14 @@ const Layout = () => {
 
   const title = useMemo(() => deslugify(pathname.split('/')[1]), [pathname]);
 
+  const toastStyle = useMemo(
+    () => ({
+      background: theme === Themes.Dark ? '#fff' : '#2b2c37',
+      color: theme === Themes.Dark ? '#2b2c37' : '#fff',
+    }),
+    [theme]
+  );
+
   const boardColumns = useMemo(
     () =>
       boards
@@ -69,7 +79,7 @@ const Layout = () => {
   const onDelete = () => {
     reduxDispatch(deleteBoard({ id: pathname.split('/').at(-1) ?? '' }));
     navigate('/');
-    toast.success(`${taskNameEllipsis(title)} is deleted.`);
+    toast.success(`${addEllipsis(title)} board is deleted.`);
     toggleDeleteBoard();
   };
 
@@ -119,8 +129,11 @@ const Layout = () => {
           onDelete={onDelete}
           type="board"
         />
-        {/* TODO: change toastify library => react-hot-toast */}
-        <ToastContainer autoClose={2000} theme={theme} />
+        <Toaster
+          toastOptions={{
+            style: toastStyle,
+          }}
+        />
       </main>
     </>
   );

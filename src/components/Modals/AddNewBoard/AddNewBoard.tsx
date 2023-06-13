@@ -1,6 +1,6 @@
 import { FieldArray, Form, Formik } from 'formik';
 import type { FC } from 'react';
-import { toast } from 'react-toastify';
+import toast from 'react-hot-toast';
 import { useAppDispatch } from 'store';
 import * as Yup from 'yup';
 
@@ -11,7 +11,7 @@ import TextField from '@components/TextField';
 
 import { addNewBoard } from '@slices/boardSlice';
 
-import { generateID, taskNameEllipsis } from '@utils/index';
+import { addEllipsis, generateID } from '@utils/index';
 
 type AddNewBoardProps = {
   closeModal: () => void;
@@ -43,7 +43,7 @@ const AddNewBoard: FC<AddNewBoardProps> = ({ closeModal, istheModalOpen }) => {
       })
     );
     closeModal();
-    toast.success(`${taskNameEllipsis(values.name)} added.`);
+    toast.success(`${addEllipsis(values.name)} board added.`);
   };
 
   return (

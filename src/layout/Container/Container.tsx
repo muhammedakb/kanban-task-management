@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useReducer, useState } from 'react';
 import type { FC } from 'react';
-import { toast } from 'react-toastify';
+import toast from 'react-hot-toast';
 import { useAppDispatch } from 'store';
 
 import type { Column } from '@@types/types';
@@ -17,7 +17,7 @@ import { useGetOpenedItem } from '@hooks/useGetOpenedItem';
 
 import { deleteTask } from '@slices/boardSlice';
 
-import { handleColor, taskNameEllipsis } from '@utils/index';
+import { addEllipsis, handleColor } from '@utils/index';
 
 import { modalInitialState, modalReducer, Toggles } from './reducer';
 
@@ -74,7 +74,7 @@ const Container: FC<ContainerProps> = ({ columns }) => {
       })
     );
     toggleTask('delete');
-    toast.success(`${taskNameEllipsis(openedItem?.title ?? '')} task deleted.`);
+    toast.success(`${addEllipsis(openedItem?.title ?? '')} task deleted.`);
   };
 
   return (
