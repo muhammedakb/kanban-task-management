@@ -3,8 +3,9 @@ import { Form, Formik } from 'formik';
 import type { FC } from 'react';
 import { toast } from 'react-toastify';
 import { useAppDispatch } from 'store';
-import type { Task, TaskForm } from 'types/types';
 import * as Yup from 'yup';
+
+import type { Task, TaskForm } from '@@types/types';
 
 import Button from '@components/Button';
 import Modal from '@components/Modal';

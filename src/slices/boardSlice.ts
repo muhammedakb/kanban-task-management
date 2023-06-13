@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import type { Board, BoardForm, Boards, Task } from 'types/types';
+import type { Board, BoardForm, Boards, Task } from '@@types/types';
 
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';

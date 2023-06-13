@@ -1,4 +1,4 @@
-import type { Task, TaskForm } from 'types/types';
+import type { Task, TaskForm } from '@@types/types';
 
 /* eslint-disable no-useless-escape */
 const slugify = (text: string): string =>
