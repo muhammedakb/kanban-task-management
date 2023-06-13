@@ -2,7 +2,8 @@ import { useCallback, useMemo, useReducer, useState } from 'react';
 import type { FC } from 'react';
 import { toast } from 'react-toastify';
 import { useAppDispatch } from 'store';
-import type { Column } from 'types/types';
+
+import type { Column } from '@@types/types';
 
 import BoardColumn from '@components/BoardColumn';
 import BoardContainer from '@components/BoardContainer';

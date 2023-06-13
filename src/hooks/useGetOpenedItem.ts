@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
-import type { Task } from 'types/types';
+
+import type { Task } from '@@types/types';
 
 import { useGetActiveBoard } from './useGetActiveBoard';
 

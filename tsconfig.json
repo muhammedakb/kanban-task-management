@@ -23,7 +23,7 @@
       "@hooks/*": ["hooks/*"],
       "@layout/*": ["layout/*"],
       "@slices/*": ["slices/*"],
-      "@types/*": ["types/*"],
+      "@@types/*": ["types/*"],
       "@utils/*": ["utils/*"]
     }
   },
