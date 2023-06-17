@@ -21,7 +21,7 @@ import { getBoards } from '@slices/selector';
 
 import { addEllipsis, deslugify } from '@utils/index';
 
-import { modalInitialState, modalReducer, Toggles } from './reducer';
+import { modalInitialState, modalReducer } from './reducer';
 
 import '@components/Modals/addNew.scss';
 import 'react-toastify/dist/ReactToastify.css';
@@ -38,19 +38,19 @@ const Layout = () => {
   const [state, dispatch] = useReducer(modalReducer, modalInitialState);
 
   const toggleAddNewBoard = () => {
-    dispatch({ type: Toggles.ADD_NEW_BOARD });
+    dispatch({ type: 'ADD_NEW_BOARD' });
   };
 
   const toggleAddNewTask = () => {
-    dispatch({ type: Toggles.ADD_NEW_TASK });
+    dispatch({ type: 'ADD_NEW_TASK' });
   };
 
   const toggleDeleteBoard = () => {
-    dispatch({ type: Toggles.DELETE_BOARD });
+    dispatch({ type: 'DELETE_BOARD' });
   };
 
   const toggleEditBoard = () => {
-    dispatch({ type: Toggles.EDIT_BOARD });
+    dispatch({ type: 'EDIT_BOARD' });
   };
 
   const boardItems = useMemo(
@@ -68,6 +68,7 @@ const Layout = () => {
     [theme]
   );
 
+  // TODO: dont pass string[] => pass Column[]
   const boardColumns = useMemo(
     () =>
       boards
