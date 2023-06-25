@@ -53,7 +53,7 @@ const EditBoard: FC<EditBoardProps> = ({
     if (isSameValues) {
       toast('You did not make any changes!', { icon: '⚠️' });
     } else {
-      // FIXME: if removed any column => change it
+      // FIXME: if removed any column or added new column => change it
       const columnValues = values.columns?.map((column, index) => ({
         newValue: column,
         oldValue: columns?.[index] ?? '',
