@@ -1,12 +1,12 @@
-enum Toggles {
-  ADD_NEW_TASK = 'ADD_NEW_TASK',
-  ADD_NEW_BOARD = 'ADD_NEW_BOARD',
-  DELETE_BOARD = 'DELETE_BOARD',
-  EDIT_BOARD = 'EDIT_BOARD',
-}
+const Toggles = [
+  'ADD_NEW_TASK',
+  'ADD_NEW_BOARD',
+  'DELETE_BOARD',
+  'EDIT_BOARD',
+] as const;
 
 type ToggleAction = {
-  type: Toggles;
+  type: (typeof Toggles)[number];
 };
 
 const modalInitialState = {

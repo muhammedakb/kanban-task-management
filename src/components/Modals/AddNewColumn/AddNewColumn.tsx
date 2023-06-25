@@ -1,6 +1,6 @@
 import { Form, Formik } from 'formik';
 import type { FC } from 'react';
-import { toast } from 'react-toastify';
+import toast from 'react-hot-toast';
 import { useAppDispatch } from 'store';
 import * as Yup from 'yup';
 
@@ -12,7 +12,7 @@ import { useGetActiveBoard } from '@hooks/useGetActiveBoard';
 
 import { addNewColumn } from '@slices/boardSlice';
 
-import { taskNameEllipsis } from '@utils/index';
+import { addEllipsis } from '@utils/index';
 
 type NewColumnProps = {
   closeModal: () => void;
@@ -35,7 +35,7 @@ const AddNewColumn: FC<NewColumnProps> = ({ closeModal, istheModalOpen }) => {
       })
     );
     closeModal();
-    toast.success(`${taskNameEllipsis(columnName)} column added.`);
+    toast.success(`${addEllipsis(columnName)} column added.`);
   };
 
   return (

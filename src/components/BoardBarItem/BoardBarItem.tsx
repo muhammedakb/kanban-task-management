@@ -3,6 +3,8 @@ import classNames from 'classnames';
 import type { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 
+import { Themes } from '@@types/enums';
+
 import { useTheme } from '@context/ThemeProvider';
 
 import './boardBarItem.scss';
@@ -28,7 +30,7 @@ const BoardBarItem: FC<BoardBarItemProps> = ({
     <NavLink
       className={({ isActive }) =>
         classNames('bar__item horizontal-center', {
-          dark: theme === 'dark',
+          dark: theme === Themes.Dark,
           active: isActive,
         })
       }
@@ -42,9 +44,9 @@ const BoardBarItem: FC<BoardBarItemProps> = ({
     <button
       className={classNames('bar__item horizontal-center', {
         createBtn: isCreateButton,
-        createBtn__dark: isCreateButton && theme === 'dark',
+        createBtn__dark: isCreateButton && theme === Themes.Dark,
         hideSidebar: !isCreateButton,
-        hideSidebar__dark: !isCreateButton && theme === 'dark',
+        hideSidebar__dark: !isCreateButton && theme === Themes.Dark,
       })}
       onClick={() => onClick?.()}
     >

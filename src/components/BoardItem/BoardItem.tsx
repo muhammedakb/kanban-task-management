@@ -7,6 +7,7 @@ type BoardItemProps = {
   onItemClick: () => void;
   subTasks: number;
   taskTitle: string;
+  toggleDragStatus: (status: boolean) => void;
 };
 
 const BoardItem = ({
@@ -14,10 +15,23 @@ const BoardItem = ({
   onItemClick,
   subTasks,
   taskTitle,
+  toggleDragStatus,
 }: BoardItemProps) => {
   const { theme } = useTheme();
   return (
-    <div className={`board__item ${theme}`} onClick={onItemClick}>
+    <div
+      draggable
+      className={`board__item ${theme}`}
+      onClick={onItemClick}
+      onDragEnd={(e) => {
+        console.log('onDragEnd');
+        toggleDragStatus(false);
+      }}
+      onDragStart={(e) => {
+        console.log('started', e.target);
+        toggleDragStatus(true);
+      }}
+    >
       <p className="boar__item__title fw-700-m">{taskTitle}</p>
       <p className="board__item__subtask fw-700-xs">
         {completedSubTasks} of {subTasks} subtasks

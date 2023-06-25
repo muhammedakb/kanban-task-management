@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useReducer, useState } from 'react';
 import type { FC } from 'react';
-import { toast } from 'react-toastify';
+import toast from 'react-hot-toast';
 import { useAppDispatch } from 'store';
 
 import type { Column } from '@@types/types';
@@ -17,9 +17,9 @@ import { useGetOpenedItem } from '@hooks/useGetOpenedItem';
 
 import { deleteTask } from '@slices/boardSlice';
 
-import { handleColor, taskNameEllipsis } from '@utils/index';
+import { addEllipsis, handleColor } from '@utils/index';
 
-import { modalInitialState, modalReducer, Toggles } from './reducer';
+import { modalInitialState, modalReducer } from './reducer';
 
 type ContainerProps = {
   columns: Column[];
@@ -44,18 +44,18 @@ const Container: FC<ContainerProps> = ({ columns }) => {
   }));
 
   const toggleItemDetail = () => {
-    dispatch({ type: Toggles.ITEM_DETAIL });
+    dispatch({ type: 'ITEM_DETAIL' });
   };
 
   const toggleAddNewColumn = () => {
-    dispatch({ type: Toggles.ADD_NEW_COLUMN });
+    dispatch({ type: 'ADD_NEW_COLUMN' });
   };
 
   const toggleTask = useCallback(
     (type: 'edit' | 'delete') => {
       if (state.isItemDetailModalOn) toggleItemDetail();
       dispatch({
-        type: type === 'edit' ? Toggles.EDIT_TASK : Toggles.DELETE_TASK,
+        type: type === 'edit' ? 'EDIT_TASK' : 'DELETE_TASK',
       });
     },
     [state.isItemDetailModalOn]
@@ -74,7 +74,7 @@ const Container: FC<ContainerProps> = ({ columns }) => {
       })
     );
     toggleTask('delete');
-    toast.success(`${taskNameEllipsis(openedItem?.title ?? '')} task deleted.`);
+    toast.success(`${addEllipsis(openedItem?.title ?? '')} task deleted.`);
   };
 
   return (
@@ -97,6 +97,7 @@ const Container: FC<ContainerProps> = ({ columns }) => {
               key={column.name}
               categoryTitleColor={handleColor(index)}
               columnData={column}
+              id={column.id}
               onItemClick={onItemClick}
             />
           ))}

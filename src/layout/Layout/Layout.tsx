@@ -1,54 +1,51 @@
 import { useMemo, useReducer } from 'react';
 import classNames from 'classnames';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify';
-import { useAppDispatch, useAppSelector } from 'store';
+import { Toaster } from 'react-hot-toast';
+import { Outlet, useLocation } from 'react-router-dom';
+import { useAppSelector } from 'store';
+
+import { Themes } from '@@types/enums';
 
 import BoardBar from '@components/BoardBar';
 import Header from '@components/Header';
-import AddNewBoard from '@components/Modals/AddNewBoard';
-import AddNewTask from '@components/Modals/AddNewTask';
-import DeleteModal from '@components/Modals/DeleteModal';
-import EditBoard from '@components/Modals/EditBoard';
 
 import { useNavbarVisibility } from '@context/NavbarVisibilityProvider';
 import { useTheme } from '@context/ThemeProvider';
 
-import { deleteBoard } from '@slices/boardSlice';
+import ActionModals from '@features/ActionModals';
+
 import { getBoards } from '@slices/selector';
 
-import { deslugify, taskNameEllipsis } from '@utils/index';
+import { deslugify } from '@utils/index';
 
-import { modalInitialState, modalReducer, Toggles } from './reducer';
+import { modalInitialState, modalReducer } from './reducer';
 
 import '@components/Modals/addNew.scss';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Layout = () => {
-  const reduxDispatch = useAppDispatch();
   const boards = useAppSelector(getBoards);
   const { theme } = useTheme();
-  const navigate = useNavigate();
 
   const { pathname } = useLocation();
   const { isOpened, isMobileMenu } = useNavbarVisibility();
 
-  const [state, dispatch] = useReducer(modalReducer, modalInitialState);
+  const [modalState, dispatch] = useReducer(modalReducer, modalInitialState);
 
   const toggleAddNewBoard = () => {
-    dispatch({ type: Toggles.ADD_NEW_BOARD });
+    dispatch({ type: 'ADD_NEW_BOARD' });
   };
 
   const toggleAddNewTask = () => {
-    dispatch({ type: Toggles.ADD_NEW_TASK });
+    dispatch({ type: 'ADD_NEW_TASK' });
   };
 
   const toggleDeleteBoard = () => {
-    dispatch({ type: Toggles.DELETE_BOARD });
+    dispatch({ type: 'DELETE_BOARD' });
   };
 
   const toggleEditBoard = () => {
-    dispatch({ type: Toggles.EDIT_BOARD });
+    dispatch({ type: 'EDIT_BOARD' });
   };
 
   const boardItems = useMemo(
@@ -58,20 +55,13 @@ const Layout = () => {
 
   const title = useMemo(() => deslugify(pathname.split('/')[1]), [pathname]);
 
-  const boardColumns = useMemo(
-    () =>
-      boards
-        ?.filter((board) => board.name === title)?.[0]
-        ?.columns?.map((column) => column.name),
-    [boards, title]
+  const toastStyle = useMemo(
+    () => ({
+      background: theme === Themes.Dark ? '#fff' : '#2b2c37',
+      color: theme === Themes.Dark ? '#2b2c37' : '#fff',
+    }),
+    [theme]
   );
-
-  const onDelete = () => {
-    reduxDispatch(deleteBoard({ id: pathname.split('/').at(-1) ?? '' }));
-    navigate('/');
-    toast.success(`${taskNameEllipsis(title)} is deleted.`);
-    toggleDeleteBoard();
-  };
 
   return (
     <>
@@ -98,29 +88,19 @@ const Layout = () => {
           title={title}
         />
         <Outlet />
-        <AddNewBoard
-          closeModal={toggleAddNewBoard}
-          istheModalOpen={state.isAddNewBoardModalOn}
+        <ActionModals
+          modalState={modalState}
+          title={title}
+          toggleAddNewBoard={toggleAddNewBoard}
+          toggleAddNewTask={toggleAddNewTask}
+          toggleDeleteBoard={toggleDeleteBoard}
+          toggleEditBoard={toggleEditBoard}
         />
-        <AddNewTask
-          closeModal={toggleAddNewTask}
-          istheModalOpen={state.isAddNewTaskModalOn}
+        <Toaster
+          toastOptions={{
+            style: toastStyle,
+          }}
         />
-        <EditBoard
-          boardName={title}
-          closeModal={toggleEditBoard}
-          columns={boardColumns}
-          istheModalOpen={state.isEditBoardModalOn}
-        />
-        <DeleteModal
-          boardName={title}
-          closeModal={toggleDeleteBoard}
-          istheModalOpen={state.isDeleteBoardModalOn}
-          onDelete={onDelete}
-          type="board"
-        />
-        {/* TODO: change toastify library => react-hot-toast */}
-        <ToastContainer autoClose={2000} theme={theme} />
       </main>
     </>
   );

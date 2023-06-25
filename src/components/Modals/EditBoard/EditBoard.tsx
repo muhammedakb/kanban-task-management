@@ -1,7 +1,7 @@
 import { FieldArray, Form, Formik } from 'formik';
 import type { FC } from 'react';
+import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import { useAppDispatch } from 'store';
 import * as Yup from 'yup';
 
@@ -51,9 +51,9 @@ const EditBoard: FC<EditBoardProps> = ({
   const onSubmit = (values: Values) => {
     const isSameValues = checkSameValues(values.boardName, values.columns);
     if (isSameValues) {
-      toast.warn('You did not make any changes!');
+      toast('You did not make any changes!', { icon: '⚠️' });
     } else {
-      // FIXME: if removed any column => change it
+      // FIXME: if removed any column or added new column => change it
       const columnValues = values.columns?.map((column, index) => ({
         newValue: column,
         oldValue: columns?.[index] ?? '',

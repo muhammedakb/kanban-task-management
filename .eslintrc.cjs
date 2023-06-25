@@ -29,6 +29,8 @@ module.exports = {
               ['^@components'],
               // Packages starting with `@context`
               ['^@context'],
+              // Packages starting with `@features`
+              ['^@features'],
               // Packages starting with `@hooks`
               ['^@hooks'],
               // Packages starting with `@layout`

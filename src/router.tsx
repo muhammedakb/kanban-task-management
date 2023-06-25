@@ -1,10 +1,11 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { useAppSelector } from 'store';
 
+import NoMatch from '@features/NoMatch';
+
 import { getBoards } from '@slices/selector';
 
 import Container from './layout/Container';
-import NoMatch from './layout/Container/NoMatch';
 import Layout from './layout/Layout';
 import { slugify } from './utils';
 

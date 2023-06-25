@@ -1,5 +1,7 @@
 import classNames from 'classnames';
 
+import { Themes } from '@@types/enums';
+
 import { useTheme } from '@context/ThemeProvider';
 
 import Spinner from '../Spinner';
@@ -32,7 +34,7 @@ const Button = ({
     <button
       className={classNames('btn center-flex', variant, size, {
         fullwidth: fullWidth,
-        dark: theme === 'dark',
+        dark: theme === Themes.Dark,
       })}
       disabled={disabled}
       onClick={onClick}

@@ -1,13 +1,15 @@
 import { createContext, useCallback, useContext, useMemo } from 'react';
 import type { ReactNode } from 'react';
 
+import { Themes } from '@@types/enums';
+
 import useLocalStorage from '@hooks/useLocalStorage';
 
 type ThemeContextProps = {
   children: ReactNode;
 };
 
-type Theme = 'dark' | 'light';
+type Theme = Themes.Dark | Themes.Light;
 
 type ThemeContextType = {
   theme: Theme;
@@ -15,15 +17,15 @@ type ThemeContextType = {
 };
 
 const ThemeContext = createContext<ThemeContextType>({
-  theme: 'light',
+  theme: Themes.Light,
   toggleTheme: () => {},
 });
 
 const ThemeProvider = ({ children }: ThemeContextProps) => {
-  const [theme, setTheme] = useLocalStorage<Theme>('theme', 'light');
+  const [theme, setTheme] = useLocalStorage<Theme>('theme', Themes.Light);
 
   const toggleTheme = useCallback(() => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
+    setTheme(theme === Themes.Dark ? Themes.Light : Themes.Dark);
   }, [setTheme, theme]);
 
   const value = useMemo(() => ({ theme, toggleTheme }), [theme, toggleTheme]);

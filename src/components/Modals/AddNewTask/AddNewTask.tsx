@@ -1,7 +1,7 @@
 import { memo, useMemo } from 'react';
 import { Form, Formik } from 'formik';
 import type { FC } from 'react';
-import { toast } from 'react-toastify';
+import toast from 'react-hot-toast';
 import { useAppDispatch } from 'store';
 import * as Yup from 'yup';
 
@@ -16,11 +16,7 @@ import { useGetActiveBoard } from '@hooks/useGetActiveBoard';
 
 import { addNewTask, editTask } from '@slices/boardSlice';
 
-import {
-  correctNewTaskFormData,
-  generateID,
-  taskNameEllipsis,
-} from '@utils/index';
+import { addEllipsis, correctNewTaskFormData, generateID } from '@utils/index';
 
 import AddNewSubTask from './AddNewSubTask';
 
@@ -84,7 +80,7 @@ const AddNewTask: FC<AddNewTaskProps> = ({
         })
       );
       closeModal();
-      toast.success(`${taskNameEllipsis(values.title)} task edited.`);
+      toast.success(`${addEllipsis(values.title)} task edited.`);
     } else {
       dispatch(
         addNewTask({
@@ -93,7 +89,7 @@ const AddNewTask: FC<AddNewTaskProps> = ({
         })
       );
       closeModal();
-      toast.success(`${taskNameEllipsis(values.title)} task added.`);
+      toast.success(`${addEllipsis(values.title)} task added.`);
     }
   };
 

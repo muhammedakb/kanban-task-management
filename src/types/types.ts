@@ -9,13 +9,13 @@ export type Board = {
 };
 
 export type Column = {
-  id?: string;
+  id: string;
   name: string;
   tasks: Task[];
 };
 
 export type Task = {
-  id?: string;
+  id: string;
   title: string;
   description: string;
   status: string;
@@ -28,7 +28,7 @@ export type BoardForm = Omit<Board, 'columns'> & {
 };
 
 export type Subtask = {
-  id?: string;
+  id: string;
   title: string;
   isCompleted: boolean;
 };
