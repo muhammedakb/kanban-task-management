@@ -33,6 +33,7 @@ const AddNewBoard: FC<AddNewBoardProps> = ({ closeModal, istheModalOpen }) => {
       : values.columns.map((value) => ({
           name: value,
           tasks: [],
+          id: generateID(),
         }));
 
     dispatch(

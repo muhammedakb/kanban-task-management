@@ -101,6 +101,7 @@ const AddNewTask: FC<AddNewTaskProps> = ({
     >
       <Formik
         initialValues={{
+          id: taskValues?.id ?? '',
           title: taskValues?.title ?? '',
           description: taskValues?.description ?? '',
           subtasks: taskValues?.subtasks?.map((subtask) => subtask.title) ?? [
