@@ -24,7 +24,7 @@ const BoardItem = ({
       className={`board__item ${theme}`}
       onClick={onItemClick}
       onDragEnd={(e) => {
-        console.log('onDragEnd');
+        console.log('onDragEnd', e.target);
         toggleDragStatus(false);
       }}
       onDragStart={(e) => {

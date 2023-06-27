@@ -21,32 +21,14 @@ const BoardColumn: FC<BoardColumnProps> = ({
   id,
   onItemClick,
 }) => {
-  const [isDragLeave, setIsDragLeave] = useState<boolean>();
+  const [, setIsDragLeave] = useState<boolean>();
 
   const toggleDragStatus = (status: boolean) => {
     setIsDragLeave(status);
   };
 
-  const style = {
-    opacity: '0.3',
-  };
-
-  const style2 = {
-    backgroundColor: '#7acf64',
-    borderRadius: '5px',
-  };
-
-  // sütüklediğim item'ın bulunduğu column'u bul ve diğer columnları ayır
-  // ayırdığın columnlara stil ata kendi bulunduğum column'a ayrı stil ata
-  // how can i do sometimessssss
-
-  // aldığım id'lerin sadece baş karakterini alarak yeni id'yi class'a ekle
-
   return (
-    <section
-      className={classNames('board__column', id)}
-      style={isDragLeave ? style : style2}
-    >
+    <section className={classNames('board__column', id)}>
       <header className="board__column__title">
         <BoardCategoryTitle
           color={categoryTitleColor}
