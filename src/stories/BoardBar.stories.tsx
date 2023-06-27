@@ -10,9 +10,9 @@ export default {
 const Template: ComponentStory<typeof BoardBar> = () => (
   <BoardBar
     boardItems={[
-      { text: 'Platform Launch', onClick: () => {} },
-      { text: 'Marketing Plan', onClick: () => {} },
-      { text: 'Roadmap', onClick: () => {} },
+      { id: 'Platform-Launch', text: 'Platform Launch', onClick: () => {} },
+      { id: 'Marketing-Plan', text: 'Marketing Plan', onClick: () => {} },
+      { id: 'Roadmap', text: 'Roadmap', onClick: () => {} },
     ]}
     onCreateClick={() => {}}
   />

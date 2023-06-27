@@ -18,6 +18,7 @@ const Template: ComponentStory<typeof BoardContainer> = () => (
           key={column.name}
           categoryTitleColor=""
           columnData={column}
+          id={column.id}
           onItemClick={(item) => console.log('ITEM', item)}
         />
       ))}
